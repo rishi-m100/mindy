@@ -1,6 +1,7 @@
-##✈️ Overview
-**Mindy is an AI travel-planning agent that takes user specifications and constraints into account when planning an itinerary
-**Mindy-Bench is a synthetic benchmark designed to evaluate AI travel-planning agents. Unlike existing benchmarks that rely on live web data—which suffers from price fluctuations and "link rot"—Mindy-Bench provides a deterministic environment. This ensures that agent performance can be measured consistently and reproducibly against a verified ground-truth dataset of flights, hotels, and activities.
+# Mindy-Bench & AI Travel Agent
+
+Mindy is an AI travel-planning agent that takes user specifications and constraints into account when planning an itinerary
+Mindy-Bench is a synthetic benchmark designed to evaluate AI travel-planning agents. Unlike existing benchmarks that rely on live web data—which suffers from price fluctuations and "link rot"—Mindy-Bench provides a deterministic environment. This ensures that agent performance can be measured consistently and reproducibly against a verified ground-truth dataset of flights, hotels, and activities.
 
 ## ✈️ Project Overview
 
