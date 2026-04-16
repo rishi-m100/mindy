@@ -110,7 +110,8 @@ def search_flights(
           AND (LOWER(ad.city) = LOWER(?) OR UPPER(f.destination) = UPPER(?))
           AND f.depart_date = ?
     """
-
+    # ai assistance to write the above SQL query
+    
     origin      = _norm(origin)
     destination = _norm(destination)
     params = [origin, origin, destination, destination, date]
