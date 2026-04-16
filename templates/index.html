@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindy | AI Travel Agent</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-panel: rgba(30, 41, 59, 0.7);
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.1) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--bg-panel);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        input {
+            flex: 1;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        button:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .response-area {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            display: none;
+        }
+        
+        .response-area.visible {
+            display: block;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .loader {
+            display: none;
+            text-align: center;
+            margin: 2rem 0;
+            font-family: 'Outfit', sans-serif;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .loader.visible {
+            display: block;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; text-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+            100% { opacity: 0.5; }
+        }
+
+        /* Syntax highlighting for JSON output */
+        .key { color: #60a5fa; }
+        .string { color: #34d399; }
+        .number { color: #fbbf24; }
+        .boolean { color: #f87171; }
+        .null { color: #94a3b8; }
+    </style>
+</head>
+<body>
+
+    <h1>Mindy</h1>
+    <div class="subtitle">Your Personal AI Travel Agent</div>
+
+    <div class="container">
+        <div class="input-group">
+            <input type="text" id="promptInput" placeholder="E.g., NYC to LA, June 12-15 under $1500" autocomplete="off" onkeydown="if(event.key === 'Enter') submitPrompt()">
+            <button id="submitBtn" onclick="submitPrompt()">Plan Trip</button>
+        </div>
+
+        <div class="loader" id="loader">Mindy is building your itinerary...</div>
+        <div class="response-area" id="responseArea"></div>
+    </div>
+
+    <script>
+        // Simple HTML formatting for JSON
+        function syntaxHighlight(json) {
+            if (typeof json != 'string') {
+                 json = JSON.stringify(json, undefined, 2);
+            }
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                var cls = 'number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'key';
+                    } else {
+                        cls = 'string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+
+        async function submitPrompt() {
+            const input = document.getElementById('promptInput');
+            const btn = document.getElementById('submitBtn');
+            const loader = document.getElementById('loader');
+            const responseArea = document.getElementById('responseArea');
+            
+            const prompt = input.value.trim();
+            if (!prompt) return;
+
+            // Update UI State
+            input.disabled = true;
+            btn.disabled = true;
+            responseArea.classList.remove('visible');
+            loader.classList.add('visible');
+            responseArea.innerHTML = '';
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    try {
+                        // Try to parse the result as JSON if it's a string, then highlight it
+                        const parsed = typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
+                        responseArea.innerHTML = syntaxHighlight(parsed);
+                    } catch (e) {
+                         // If it's not valid JSON, just display the raw text
+                        responseArea.textContent = data.result;
+                    }
+                } else {
+                    responseArea.innerHTML = `<span style="color: #ef4444;">Error: ${data.error || 'Something went wrong'}</span>`;
+                }
+            } catch (err) {
+                responseArea.innerHTML = `<span style="color: #ef4444;">Error: ${err.message}</span>`;
+            } finally {
+                // Restore UI State
+                loader.classList.remove('visible');
+                responseArea.classList.add('visible');
+                input.disabled = false;
+                btn.disabled = false;
+                input.focus();
+            }
+        }
+    </script>
+</body>
+</html>

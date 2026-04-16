@@ -1,2 +1,5 @@
 .env
 data/csvs
+__pycache__
+.ruff_cache
+data/mindy_dataset.db
