@@ -71,7 +71,7 @@ EASY_TASKS = [
             "type": "flight",
             "origin_city": "Chicago",
             "destination_city": "Seattle",
-            "date": "2025-07-01"
+            "date": "2025-06-10"
         },
         success_criteria={
             "must_have_flight": True,
@@ -94,7 +94,7 @@ EASY_TASKS = [
         ground_truth={
             "type": "hotel",
             "city": "New York",
-            "check_in": "2025-10-05",
+            "check_in": "2025-06-10",
             "required_amenity": "gym"
         },
         success_criteria={
@@ -120,7 +120,7 @@ EASY_TASKS = [
             "type": "flight",
             "origin_city": "New York",
             "destination_city": "Los Angeles",
-            "date": "2025-09-15",
+            "date": "2025-06-11",
             "max_arrival_time": "14:00"
         },
         success_criteria={
@@ -425,7 +425,7 @@ def evaluate_task(task: BenchmarkTask, agent_output: dict) -> TaskScore:
 
 
 # run benchmark
-def run_benchmark(tasks: list[BenchmarkTask] = None, verbose: bool = True) -> dict:
+def run_benchmark(tasks: list[BenchmarkTask] = None, verbose: bool = True, num_runs: int = 3) -> dict:
     """Run benchmark on all tasks and return results."""
     if tasks is None:
         tasks = EASY_TASKS
@@ -447,33 +447,69 @@ def run_benchmark(tasks: list[BenchmarkTask] = None, verbose: bool = True) -> di
             print(f"Task {i}/{len(tasks)}: {task.name}")
             print(f"{'='*70}")
             print(f"Prompt: {task.user_prompt}")
-            print(f"\nRunning agent...")
+            print(f"\nRunning agent {num_runs} times...")
 
-        try:
-            agent_response = run_agent(task.user_prompt, verbose=False)
-            agent_output = json.loads(agent_response)
-        except Exception as e:
+        # Run the task multiple times
+        run_scores = []
+        for run_num in range(1, num_runs + 1):
             if verbose:
-                print(f"ERROR: Agent failed - {e}")
-            agent_output = {
-                "output": {},
-                "error": str(e)
-            }
+                print(f"\n  Run {run_num}/{num_runs}...")
 
-        score = evaluate_task(task, agent_output)
-        results.append(score)
+            try:
+                agent_response = run_agent(task.user_prompt, verbose=False)
+                agent_output = json.loads(agent_response)
+            except Exception as e:
+                if verbose:
+                    print(f"  ERROR: Agent failed - {e}")
+                agent_output = {
+                    "output": {},
+                    "error": str(e)
+                }
+
+            score = evaluate_task(task, agent_output)
+            run_scores.append(score)
+
+            if verbose:
+                print(f"  CS: {score.constraint_satisfaction:.3f} | BE: {score.budget_efficiency:.3f} | LS: {score.logistics_score:.3f}")
+
+        # Calculate average scores across all runs
+        avg_cs = sum(s.constraint_satisfaction for s in run_scores) / len(run_scores)
+        avg_be = sum(s.budget_efficiency for s in run_scores) / len(run_scores)
+        avg_ls = sum(s.logistics_score for s in run_scores) / len(run_scores)
+
+        # Create averaged task score (using the last run's details and agent_response as representative)
+        avg_score = TaskScore(
+            task_id=task.task_id,
+            task_name=task.name,
+            constraint_satisfaction=avg_cs,
+            budget_efficiency=avg_be,
+            logistics_score=avg_ls,
+            details={
+                "average_of_runs": num_runs,
+                "individual_runs": [
+                    {
+                        "run": idx + 1,
+                        "cs": s.constraint_satisfaction,
+                        "be": s.budget_efficiency,
+                        "ls": s.logistics_score,
+                        "details": s.details
+                    }
+                    for idx, s in enumerate(run_scores)
+                ],
+                "last_run_details": run_scores[-1].details if run_scores else {}
+            },
+            agent_response=run_scores[-1].agent_response if run_scores else None
+        )
+
+        results.append(avg_score)
 
         if verbose:
-            print(f"\n--- SCORES ---")
-            print(f"Constraint Satisfaction: {score.constraint_satisfaction:.3f}")
-            print(f"Budget Efficiency:       {score.budget_efficiency:.3f}")
-            print(f"Logistics Score:         {score.logistics_score:.3f}")
+            print(f"\n--- AVERAGE SCORES (across {num_runs} runs) ---")
+            print(f"Constraint Satisfaction: {avg_cs:.3f}")
+            print(f"Budget Efficiency:       {avg_be:.3f}")
+            print(f"Logistics Score:         {avg_ls:.3f}")
 
-            if score.details:
-                print(f"\n--- DETAILS ---")
-                print(json.dumps(score.details, indent=2))
-
-    # Calculate averages
+    # Calculate overall averages across all tasks
     if verbose:
         print(f"\n{'='*70}")
         print("BENCHMARK SUMMARY")
@@ -485,7 +521,8 @@ def run_benchmark(tasks: list[BenchmarkTask] = None, verbose: bool = True) -> di
 
     summary = {
         "total_tasks": len(results),
-        "average_scores": {
+        "runs_per_task": num_runs,
+        "overall_average_scores": {
             "constraint_satisfaction": avg_cs,
             "budget_efficiency": avg_be,
             "logistics_score": avg_ls
@@ -494,9 +531,10 @@ def run_benchmark(tasks: list[BenchmarkTask] = None, verbose: bool = True) -> di
     }
 
     if verbose:
-        print(f"\nAverage Constraint Satisfaction: {avg_cs:.3f}")
-        print(f"Average Budget Efficiency:       {avg_be:.3f}")
-        print(f"Average Logistics Score:         {avg_ls:.3f}")
+        print(f"\nEach task was run {num_runs} times.")
+        print(f"\nOverall Average Constraint Satisfaction: {avg_cs:.3f}")
+        print(f"Overall Average Budget Efficiency:       {avg_be:.3f}")
+        print(f"Overall Average Logistics Score:         {avg_ls:.3f}")
         print(f"\n{'='*70}\n")
 
     return summary
@@ -523,6 +561,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Mindy Bench - AI Travel Agent Benchmark")
     parser.add_argument("--output", "-o", type=str, help="Output path for results JSON")
     parser.add_argument("--quiet", "-q", action="store_true", help="Suppress verbose output")
+    parser.add_argument("--runs", "-r", type=int, default=3, help="Number of times to run each task (default: 3)")
 
     args = parser.parse_args()
 
@@ -530,5 +569,5 @@ if __name__ == "__main__":
     print("MINDY BENCH - AI Travel Agent Benchmarking System")
 
 
-    results = run_benchmark(verbose=not args.quiet)
+    results = run_benchmark(verbose=not args.quiet, num_runs=args.runs)
     save_results(results, args.output)

@@ -1,7 +1,8 @@
 {
   "total_tasks": 3,
-  "average_scores": {
-    "constraint_satisfaction": 0.6,
+  "runs_per_task": 3,
+  "overall_average_scores": {
+    "constraint_satisfaction": 0.9333333333333335,
     "budget_efficiency": 1.0,
     "logistics_score": 1.0
   },
@@ -9,29 +10,118 @@
     {
       "task_id": "easy_01",
       "task_name": "Find Cheapest Flight in Time Period",
-      "constraint_satisfaction": 0.6,
+      "constraint_satisfaction": 1.0,
       "budget_efficiency": 1.0,
       "logistics_score": 1.0,
       "details": {
-        "constraint_satisfaction": {
-          "has_flight": true,
-          "correct_route": true,
-          "correct_date": false,
-          "is_cheapest": false,
-          "optimal_price": null,
-          "has_availability": true,
-          "met_constraints": 3,
-          "total_constraints": 5
-        },
-        "budget_efficiency": {
-          "agent_cost": 325.48,
-          "optimal_cost": 325.48,
-          "budget": 5000,
-          "over_budget": false
-        },
-        "logistics": {
-          "violations": [],
-          "violation_count": 0
+        "average_of_runs": 3,
+        "individual_runs": [
+          {
+            "run": 1,
+            "cs": 1.0,
+            "be": 1.0,
+            "ls": 1.0,
+            "details": {
+              "constraint_satisfaction": {
+                "has_flight": true,
+                "correct_route": true,
+                "correct_date": true,
+                "is_cheapest": true,
+                "optimal_price": 325.48,
+                "has_availability": true,
+                "met_constraints": 5,
+                "total_constraints": 5
+              },
+              "budget_efficiency": {
+                "agent_cost": 325.48,
+                "optimal_cost": 325.48,
+                "budget": 5000,
+                "over_budget": false
+              },
+              "logistics": {
+                "violations": [],
+                "violation_count": 0
+              }
+            }
+          },
+          {
+            "run": 2,
+            "cs": 1.0,
+            "be": 1.0,
+            "ls": 1.0,
+            "details": {
+              "constraint_satisfaction": {
+                "has_flight": true,
+                "correct_route": true,
+                "correct_date": true,
+                "is_cheapest": true,
+                "optimal_price": 325.48,
+                "has_availability": true,
+                "met_constraints": 5,
+                "total_constraints": 5
+              },
+              "budget_efficiency": {
+                "agent_cost": 325.48,
+                "optimal_cost": 325.48,
+                "budget": 5000,
+                "over_budget": false
+              },
+              "logistics": {
+                "violations": [],
+                "violation_count": 0
+              }
+            }
+          },
+          {
+            "run": 3,
+            "cs": 1.0,
+            "be": 1.0,
+            "ls": 1.0,
+            "details": {
+              "constraint_satisfaction": {
+                "has_flight": true,
+                "correct_route": true,
+                "correct_date": true,
+                "is_cheapest": true,
+                "optimal_price": 325.48,
+                "has_availability": true,
+                "met_constraints": 5,
+                "total_constraints": 5
+              },
+              "budget_efficiency": {
+                "agent_cost": 325.48,
+                "optimal_cost": 325.48,
+                "budget": 5000,
+                "over_budget": false
+              },
+              "logistics": {
+                "violations": [],
+                "violation_count": 0
+              }
+            }
+          }
+        ],
+        "last_run_details": {
+          "constraint_satisfaction": {
+            "has_flight": true,
+            "correct_route": true,
+            "correct_date": true,
+            "is_cheapest": true,
+            "optimal_price": 325.48,
+            "has_availability": true,
+            "met_constraints": 5,
+            "total_constraints": 5
+          },
+          "budget_efficiency": {
+            "agent_cost": 325.48,
+            "optimal_cost": 325.48,
+            "budget": 5000,
+            "over_budget": false
+          },
+          "logistics": {
+            "violations": [],
+            "violation_count": 0
+          }
         }
       },
       "agent_response": {
@@ -46,7 +136,7 @@
           "activities": [],
           "total_cost": 325.48
         },
-        "message": "I found the cheapest flight from Chicago (ORD) to Seattle (SEA) on June 10th, 2025:\n\n**Flight FL00000619 - JetBlue B68305**\n- Departure: 5:15 AM from ORD\n- Arrival: 9:23 AM at SEA\n- Duration: 4 hours 14 minutes\n- Price: $325.48\n- 1 stop in El Paso (ELP) with a 2 hour 46 minute layover\n- 91 seats available\n\nThis is the most affordable option for your requested date. There is one other flight available that day (Delta DL2032) departing at 4:10 PM for $418.01 if you prefer a later departure time.\n\nWould you like me to help you find hotels or activities in Seattle?",
+        "message": "I found the cheapest flight from Chicago (ORD) to Seattle (SEA) on June 10th, 2025:\n\n**JetBlue Flight B68305**\n- Departure: 5:15 AM from ORD\n- Arrival: 9:23 AM at SEA\n- Duration: 4 hours 14 minutes\n- Price: $325.48\n- 1 stop in El Paso (ELP) with a 2 hour 46 minute layover\n- 91 seats available\n\nThis is the most affordable option for your travel date. There is one other flight available that day (Delta DL2032) departing at 4:10 PM for $418.01 if you prefer a later departure time.\n\nWould you like me to help you find hotels or activities in Seattle?",
         "trace": [
           {
             "step": "parse_constraints",
@@ -135,12 +225,12 @@
               "hotels": [],
               "activities": [],
               "total_cost": 325.48,
-              "message": "I found the cheapest flight from Chicago (ORD) to Seattle (SEA) on June 10th, 2025:\n\n**Flight FL00000619 - JetBlue B68305**\n- Departure: 5:15 AM from ORD\n- Arrival: 9:23 AM at SEA\n- Duration: 4 hours 14 minutes\n- Price: $325.48\n- 1 stop in El Paso (ELP) with a 2 hour 46 minute layover\n- 91 seats available\n\nThis is the most affordable option for your requested date. There is one other flight available that day (Delta DL2032) departing at 4:10 PM for $418.01 if you prefer a later departure time.\n\nWould you like me to help you find hotels or activities in Seattle?"
+              "message": "I found the cheapest flight from Chicago (ORD) to Seattle (SEA) on June 10th, 2025:\n\n**JetBlue Flight B68305**\n- Departure: 5:15 AM from ORD\n- Arrival: 9:23 AM at SEA\n- Duration: 4 hours 14 minutes\n- Price: $325.48\n- 1 stop in El Paso (ELP) with a 2 hour 46 minute layover\n- 91 seats available\n\nThis is the most affordable option for your travel date. There is one other flight available that day (Delta DL2032) departing at 4:10 PM for $418.01 if you prefer a later departure time.\n\nWould you like me to help you find hotels or activities in Seattle?"
             },
             "output": "PASS",
             "tokens": {
               "input_tokens": 3312,
-              "output_tokens": 358
+              "output_tokens": 352
             }
           }
         ]
@@ -149,28 +239,114 @@
     {
       "task_id": "easy_02",
       "task_name": "Find Hotel with 1 Amenity Requirement",
-      "constraint_satisfaction": 0.6,
+      "constraint_satisfaction": 1.0,
       "budget_efficiency": 1.0,
       "logistics_score": 1.0,
       "details": {
-        "constraint_satisfaction": {
-          "has_hotel": true,
-          "correct_city": true,
-          "has_gym": true,
-          "has_availability": false,
-          "correct_date": false,
-          "met_constraints": 3,
-          "total_constraints": 5
-        },
-        "budget_efficiency": {
-          "agent_cost": 280.01,
-          "optimal_cost": 280.01,
-          "budget": 5000,
-          "over_budget": false
-        },
-        "logistics": {
-          "violations": [],
-          "violation_count": 0
+        "average_of_runs": 3,
+        "individual_runs": [
+          {
+            "run": 1,
+            "cs": 1.0,
+            "be": 1.0,
+            "ls": 1.0,
+            "details": {
+              "constraint_satisfaction": {
+                "has_hotel": true,
+                "correct_city": true,
+                "has_gym": true,
+                "has_availability": true,
+                "correct_date": true,
+                "met_constraints": 5,
+                "total_constraints": 5
+              },
+              "budget_efficiency": {
+                "agent_cost": 280.01,
+                "optimal_cost": 280.01,
+                "budget": 5000,
+                "over_budget": false
+              },
+              "logistics": {
+                "violations": [],
+                "violation_count": 0
+              }
+            }
+          },
+          {
+            "run": 2,
+            "cs": 1.0,
+            "be": 1.0,
+            "ls": 1.0,
+            "details": {
+              "constraint_satisfaction": {
+                "has_hotel": true,
+                "correct_city": true,
+                "has_gym": true,
+                "has_availability": true,
+                "correct_date": true,
+                "met_constraints": 5,
+                "total_constraints": 5
+              },
+              "budget_efficiency": {
+                "agent_cost": 280.01,
+                "optimal_cost": 280.01,
+                "budget": 5000,
+                "over_budget": false
+              },
+              "logistics": {
+                "violations": [],
+                "violation_count": 0
+              }
+            }
+          },
+          {
+            "run": 3,
+            "cs": 1.0,
+            "be": 1.0,
+            "ls": 1.0,
+            "details": {
+              "constraint_satisfaction": {
+                "has_hotel": true,
+                "correct_city": true,
+                "has_gym": true,
+                "has_availability": true,
+                "correct_date": true,
+                "met_constraints": 5,
+                "total_constraints": 5
+              },
+              "budget_efficiency": {
+                "agent_cost": 280.01,
+                "optimal_cost": 280.01,
+                "budget": 5000,
+                "over_budget": false
+              },
+              "logistics": {
+                "violations": [],
+                "violation_count": 0
+              }
+            }
+          }
+        ],
+        "last_run_details": {
+          "constraint_satisfaction": {
+            "has_hotel": true,
+            "correct_city": true,
+            "has_gym": true,
+            "has_availability": true,
+            "correct_date": true,
+            "met_constraints": 5,
+            "total_constraints": 5
+          },
+          "budget_efficiency": {
+            "agent_cost": 280.01,
+            "optimal_cost": 280.01,
+            "budget": 5000,
+            "over_budget": false
+          },
+          "logistics": {
+            "violations": [],
+            "violation_count": 0
+          }
         }
       },
       "agent_response": {
@@ -188,7 +364,7 @@
           "check_out": "2025-06-11",
           "hotel_nights": 1
         },
-        "message": "I found The New York Holiday Inn for your stay on June 10th, 2025. This hotel meets your requirement of having a gym and also includes a pool, wifi, breakfast, and parking. It's highly rated at 4.5 stars with 5,725 reviews and is located 6.5 miles from JFK airport. The total cost for 1 night is $280.01. If you need a different check-out date or would like to see other options, please let me know!",
+        "message": "I found The New York Holiday Inn for your stay on June 10th, 2025. This hotel meets your requirement of having a gym and also includes a pool, wifi, breakfast, and parking. It's rated 4.5 stars with 5,725 reviews and is located 6.5 miles from JFK airport. The total cost for 1 night is $280.01. If you need a different check-out date or have any other preferences, please let me know!",
         "trace": [
           {
             "step": "parse_constraints",
@@ -396,12 +572,12 @@
               "check_out": "2025-06-11",
               "hotel_nights": 1,
               "total_cost": 280.01,
-              "message": "I found The New York Holiday Inn for your stay on June 10th, 2025. This hotel meets your requirement of having a gym and also includes a pool, wifi, breakfast, and parking. It's highly rated at 4.5 stars with 5,725 reviews and is located 6.5 miles from JFK airport. The total cost for 1 night is $280.01. If you need a different check-out date or would like to see other options, please let me know!"
+              "message": "I found The New York Holiday Inn for your stay on June 10th, 2025. This hotel meets your requirement of having a gym and also includes a pool, wifi, breakfast, and parking. It's rated 4.5 stars with 5,725 reviews and is located 6.5 miles from JFK airport. The total cost for 1 night is $280.01. If you need a different check-out date or have any other preferences, please let me know!"
             },
             "output": "PASS",
             "tokens": {
               "input_tokens": 4357,
-              "output_tokens": 349
+              "output_tokens": 345
             }
           }
         ]
@@ -410,28 +586,114 @@
     {
       "task_id": "easy_03",
       "task_name": "Find Flight within Specific Time Constraint",
-      "constraint_satisfaction": 0.6,
+      "constraint_satisfaction": 0.8000000000000002,
       "budget_efficiency": 1.0,
       "logistics_score": 1.0,
       "details": {
-        "constraint_satisfaction": {
-          "has_flight": true,
-          "correct_route": true,
-          "correct_date": false,
-          "arrives_on_time": false,
-          "has_availability": true,
-          "met_constraints": 3,
-          "total_constraints": 5
-        },
-        "budget_efficiency": {
-          "agent_cost": 2379.92,
-          "optimal_cost": 2379.92,
-          "budget": 23799.2,
-          "over_budget": false
-        },
-        "logistics": {
-          "violations": [],
-          "violation_count": 0
+        "average_of_runs": 3,
+        "individual_runs": [
+          {
+            "run": 1,
+            "cs": 0.8,
+            "be": 1.0,
+            "ls": 1.0,
+            "details": {
+              "constraint_satisfaction": {
+                "has_flight": true,
+                "correct_route": true,
+                "correct_date": true,
+                "arrives_on_time": false,
+                "has_availability": true,
+                "met_constraints": 4,
+                "total_constraints": 5
+              },
+              "budget_efficiency": {
+                "agent_cost": 2379.92,
+                "optimal_cost": 2379.92,
+                "budget": 23799.2,
+                "over_budget": false
+              },
+              "logistics": {
+                "violations": [],
+                "violation_count": 0
+              }
+            }
+          },
+          {
+            "run": 2,
+            "cs": 0.8,
+            "be": 1.0,
+            "ls": 1.0,
+            "details": {
+              "constraint_satisfaction": {
+                "has_flight": true,
+                "correct_route": true,
+                "correct_date": true,
+                "arrives_on_time": false,
+                "has_availability": true,
+                "met_constraints": 4,
+                "total_constraints": 5
+              },
+              "budget_efficiency": {
+                "agent_cost": 2379.92,
+                "optimal_cost": 2379.92,
+                "budget": 23799.2,
+                "over_budget": false
+              },
+              "logistics": {
+                "violations": [],
+                "violation_count": 0
+              }
+            }
+          },
+          {
+            "run": 3,
+            "cs": 0.8,
+            "be": 1.0,
+            "ls": 1.0,
+            "details": {
+              "constraint_satisfaction": {
+                "has_flight": true,
+                "correct_route": true,
+                "correct_date": true,
+                "arrives_on_time": false,
+                "has_availability": true,
+                "met_constraints": 4,
+                "total_constraints": 5
+              },
+              "budget_efficiency": {
+                "agent_cost": 2379.92,
+                "optimal_cost": 2379.92,
+                "budget": 23799.2,
+                "over_budget": false
+              },
+              "logistics": {
+                "violations": [],
+                "violation_count": 0
+              }
+            }
+          }
+        ],
+        "last_run_details": {
+          "constraint_satisfaction": {
+            "has_flight": true,
+            "correct_route": true,
+            "correct_date": true,
+            "arrives_on_time": false,
+            "has_availability": true,
+            "met_constraints": 4,
+            "total_constraints": 5
+          },
+          "budget_efficiency": {
+            "agent_cost": 2379.92,
+            "optimal_cost": 2379.92,
+            "budget": 23799.2,
+            "over_budget": false
+          },
+          "logistics": {
+            "violations": [],
+            "violation_count": 0
+          }
         }
       },
       "agent_response": {
@@ -439,14 +701,14 @@
           "flights": [
             {
               "id": "FL00000003",
-              "reason": "Only flight arriving before 4:00 PM - arrives at 2:03 PM, departs 8:25 AM with one stop in STL"
+              "reason": "Only available flight arriving before 4:00 PM - departs 8:25 AM, arrives 2:03 PM local time"
             }
           ],
           "hotels": [],
           "activities": [],
           "total_cost": 2379.92
         },
-        "message": "I found one flight from JFK to LAX on June 11th, 2025 that arrives before 4:00 PM:\n\n**Delta DL6595**\n- Departure: 8:25 AM from JFK\n- Arrival: 2:03 PM at LAX (well before your 4:00 PM requirement)\n- Duration: 5 hours 38 minutes\n- Stops: 1 (58-minute layover in St. Louis - STL)\n- Cabin: Business class\n- Price: $2,379.92\n- Seats available: 129\n\nNote: This is a business class ticket. The other flight available that day (DL4800) is a cheaper nonstop economy flight at $600, but it departs at 9:10 PM and arrives at 2:37 AM the next day, which doesn't meet your arrival time requirement.\n\nWould you like me to search for flights on a different date to find more economy options that arrive before 4:00 PM?",
+        "message": "I found a flight that meets your requirement of arriving before 4:00 PM at LAX on June 11th, 2025:\n\n**Delta Flight DL6595**\n- Departure: 8:25 AM from JFK\n- Arrival: 2:03 PM at LAX (local time)\n- Duration: 5 hours 38 minutes\n- 1 stop in St. Louis (STL) with a 58-minute layover\n- Price: $2,379.92 (Business Class)\n\nPlease note: This is a business class ticket. Unfortunately, there were only 2 flights available on this date from JFK to LAX, and the other option (FL00000004) departs at 9:10 PM and arrives at 2:37 AM the next day, which doesn't meet your arrival time requirement.\n\nWould you like me to:\n1. Proceed with this business class flight?\n2. Search for flights on a different date?\n3. Check flights from other New York airports (LGA, EWR)?",
         "trace": [
           {
             "step": "parse_constraints",
@@ -459,10 +721,11 @@
               ],
               "soft": [],
               "assumptions": [
-                "One-way flight (not specified as round-trip)",
-                "1 traveller (number not specified)",
-                "Economy class (cabin class not specified)",
-                "Direct or connecting flights acceptable (not specified)"
+                "One-way flight (not round-trip)",
+                "1 traveller",
+                "Economy class",
+                "Direct or connecting flights acceptable",
+                "Arrival time refers to local time at LAX"
               ]
             }
           },
@@ -472,7 +735,43 @@
             "input": {
               "origin": "JFK",
               "destination": "LAX",
-              "date": "2025-06-11"
+              "date": "2025-06-11",
+              "cabin": "economy"
+            },
+            "output": [
+              {
+                "flight_id": "FL00000004",
+                "airline_iata": "DL",
+                "flight_number": "DL4800",
+                "origin_city": "New York",
+                "destination_city": "Los Angeles",
+                "origin_iata": "JFK",
+                "destination_iata": "LAX",
+                "depart_date": "2025-06-11",
+                "depart_time": "21:10",
+                "arrive_time": "02:37",
+                "duration_hours": 5.46,
+                "price": 600.0,
+                "seats_available": 121,
+                "stops": 0,
+                "layover_airport": null,
+                "layover_minutes": null,
+                "cabin": "economy"
+              }
+            ],
+            "tokens": {
+              "input_tokens": 2879,
+              "output_tokens": 143
+            }
+          },
+          {
+            "turn": 2,
+            "tool": "search_flights",
+            "input": {
+              "origin": "JFK",
+              "destination": "LAX",
+              "date": "2025-06-11",
+              "max_results": 20
             },
             "output": [
               {
@@ -515,12 +814,12 @@
               }
             ],
             "tokens": {
-              "input_tokens": 2882,
-              "output_tokens": 126
+              "input_tokens": 3194,
+              "output_tokens": 176
             }
           },
           {
-            "turn": 2,
+            "turn": 3,
             "tool": "get_flight_details",
             "input": {
               "flight_id": "FL00000003"
@@ -545,29 +844,29 @@
               "destination_city": "Los Angeles"
             },
             "tokens": {
-              "input_tokens": 3344,
-              "output_tokens": 86
+              "input_tokens": 3706,
+              "output_tokens": 138
             }
           },
           {
-            "turn": 3,
+            "turn": 4,
             "tool": "submit_itinerary",
             "input": {
               "flights": [
                 {
                   "id": "FL00000003",
-                  "reason": "Only flight arriving before 4:00 PM - arrives at 2:03 PM, departs 8:25 AM with one stop in STL"
+                  "reason": "Only available flight arriving before 4:00 PM - departs 8:25 AM, arrives 2:03 PM local time"
                 }
               ],
               "hotels": [],
               "activities": [],
               "total_cost": 2379.92,
-              "message": "I found one flight from JFK to LAX on June 11th, 2025 that arrives before 4:00 PM:\n\n**Delta DL6595**\n- Departure: 8:25 AM from JFK\n- Arrival: 2:03 PM at LAX (well before your 4:00 PM requirement)\n- Duration: 5 hours 38 minutes\n- Stops: 1 (58-minute layover in St. Louis - STL)\n- Cabin: Business class\n- Price: $2,379.92\n- Seats available: 129\n\nNote: This is a business class ticket. The other flight available that day (DL4800) is a cheaper nonstop economy flight at $600, but it departs at 9:10 PM and arrives at 2:37 AM the next day, which doesn't meet your arrival time requirement.\n\nWould you like me to search for flights on a different date to find more economy options that arrive before 4:00 PM?"
+              "message": "I found a flight that meets your requirement of arriving before 4:00 PM at LAX on June 11th, 2025:\n\n**Delta Flight DL6595**\n- Departure: 8:25 AM from JFK\n- Arrival: 2:03 PM at LAX (local time)\n- Duration: 5 hours 38 minutes\n- 1 stop in St. Louis (STL) with a 58-minute layover\n- Price: $2,379.92 (Business Class)\n\nPlease note: This is a business class ticket. Unfortunately, there were only 2 flights available on this date from JFK to LAX, and the other option (FL00000004) departs at 9:10 PM and arrives at 2:37 AM the next day, which doesn't meet your arrival time requirement.\n\nWould you like me to:\n1. Proceed with this business class flight?\n2. Search for flights on a different date?\n3. Check flights from other New York airports (LGA, EWR)?"
             },
             "output": "PASS",
             "tokens": {
-              "input_tokens": 3599,
-              "output_tokens": 408
+              "input_tokens": 4013,
+              "output_tokens": 411
             }
           }
         ]
