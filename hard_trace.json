@@ -1,0 +1,4582 @@
+{
+      "task_id": "hard_02",
+      "task_name": "Long Horizon Planning - 2 Week Trip",
+      "constraint_satisfaction": 0.3333333333333333,
+      "budget_efficiency": 1.0,
+      "logistics_score": 0.9,
+      "evaluation_score": 0.6466666666666666,
+      "passed": false,
+      "details": {
+        "average_of_runs": 3,
+        "task_info": {
+          "prompt": "I'm planning a 2-week trip to Florida (Miami) from Chicago. My budget is $5,000. I want to arrive on June 10th, 2025.",
+          "constraints": {
+            "max_budget": 5000
+          },
+          "ground_truth": {
+            "type": "multi",
+            "origin_city": "Chicago",
+            "origin": "ORD",
+            "destination_city": "Miami",
+            "destination": "MIA",
+            "date": "2025-06-10",
+            "city": "Miami",
+            "check_in": "2025-06-10",
+            "check_out": "2025-06-23",
+            "hotel_nights": 13,
+            "min_activities": 5,
+            "trip_duration_days": 14
+          },
+          "success_criteria": {
+            "must_have_flight": true,
+            "must_have_hotel": true,
+            "correct_destination": true,
+            "correct_dates": true,
+            "long_hotel_stay": true,
+            "has_multiple_activities": true,
+            "within_budget": true,
+            "has_availability": true
+          }
+        },
+        "runs": [
+          {
+            "run_number": 1,
+            "constraints": {
+              "hard": [
+                "Origin: Chicago",
+                "Destination: Miami, Florida",
+                "Arrival date: June 10th, 2025",
+                "Trip duration: 2 weeks",
+                "Budget: $5,000"
+              ],
+              "soft": [],
+              "assumptions": [
+                "Assuming 1 traveller",
+                "Assuming round-trip travel",
+                "Assuming departure date is approximately June 10th, 2025 and return date is approximately June 24th, 2025",
+                "Assuming budget covers all trip expenses (flights, accommodation, activities, food, etc.)",
+                "Assuming flexible on accommodation type and airline"
+              ]
+            },
+            "trace": [
+              {
+                "step": "parse_constraints",
+                "output": {
+                  "hard": [
+                    "Origin: Chicago",
+                    "Destination: Miami, Florida",
+                    "Arrival date: June 10th, 2025",
+                    "Trip duration: 2 weeks",
+                    "Budget: $5,000"
+                  ],
+                  "soft": [],
+                  "assumptions": [
+                    "Assuming 1 traveller",
+                    "Assuming round-trip travel",
+                    "Assuming departure date is approximately June 10th, 2025 and return date is approximately June 24th, 2025",
+                    "Assuming budget covers all trip expenses (flights, accommodation, activities, food, etc.)",
+                    "Assuming flexible on accommodation type and airline"
+                  ]
+                }
+              },
+              {
+                "turn": 1,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Chicago",
+                  "destination": "Miami",
+                  "date": "2025-06-10",
+                  "max_results": 10
+                },
+                "output": [
+                  {
+                    "flight_id": "FL00000625",
+                    "airline_iata": "WN",
+                    "flight_number": "WN2033",
+                    "origin_city": "Chicago",
+                    "destination_city": "Miami",
+                    "origin_iata": "ORD",
+                    "destination_iata": "MIA",
+                    "depart_date": "2025-06-10",
+                    "depart_time": "17:10",
+                    "arrive_time": "20:17",
+                    "duration_hours": 3.13,
+                    "price": 235.82,
+                    "seats_available": 95,
+                    "stops": 0,
+                    "layover_airport": null,
+                    "layover_minutes": null,
+                    "cabin": "economy"
+                  },
+                  {
+                    "flight_id": "FL00000626",
+                    "airline_iata": "DL",
+                    "flight_number": "DL344",
+                    "origin_city": "Chicago",
+                    "destination_city": "Miami",
+                    "origin_iata": "ORD",
+                    "destination_iata": "MIA",
+                    "depart_date": "2025-06-10",
+                    "depart_time": "22:40",
+                    "arrive_time": "01:41",
+                    "duration_hours": 3.02,
+                    "price": 236.44,
+                    "seats_available": 64,
+                    "stops": 0,
+                    "layover_airport": null,
+                    "layover_minutes": null,
+                    "cabin": "economy"
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 2973,
+                  "output_tokens": 399
+                }
+              },
+              {
+                "turn": 1,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-24",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 2973,
+                  "output_tokens": 399
+                }
+              },
+              {
+                "turn": 1,
+                "tool": "search_hotels",
+                "input": {
+                  "city": "Miami",
+                  "check_in": "2025-06-10",
+                  "check_out": "2025-06-24",
+                  "max_results": 15
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 2973,
+                  "output_tokens": 399
+                }
+              },
+              {
+                "turn": 1,
+                "tool": "search_activities",
+                "input": {
+                  "city": "Miami",
+                  "max_results": 15
+                },
+                "output": [
+                  {
+                    "activity_id": "AC000415",
+                    "name": "Miami State Park Hike",
+                    "city": "Miami",
+                    "category": "adventure",
+                    "duration_hrs": 4.0,
+                    "cost": 0.93,
+                    "rating": 4.3,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"outdoor\", \"active\", \"nature\", \"adventure\"]"
+                  },
+                  {
+                    "activity_id": "AC000410",
+                    "name": "Miami Farmers Market",
+                    "city": "Miami",
+                    "category": "food",
+                    "duration_hrs": 2.0,
+                    "cost": 12.25,
+                    "rating": 4.0,
+                    "open_time": "07:00",
+                    "close_time": "13:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"food\", \"outdoor\", \"morning\", \"family\"]"
+                  },
+                  {
+                    "activity_id": "AC000416",
+                    "name": "Miami Waterfall Trail",
+                    "city": "Miami",
+                    "category": "adventure",
+                    "duration_hrs": 3.5,
+                    "cost": 16.54,
+                    "rating": 4.3,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"outdoor\", \"active\", \"nature\", \"adventure\"]"
+                  },
+                  {
+                    "activity_id": "AC000412",
+                    "name": "Miami Botanical Garden",
+                    "city": "Miami",
+                    "category": "nature",
+                    "duration_hrs": 2.0,
+                    "cost": 18.1,
+                    "rating": 4.6,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"nature\", \"outdoor\", \"family\"]"
+                  },
+                  {
+                    "activity_id": "AC000433",
+                    "name": "Miami Trivia Night",
+                    "city": "Miami",
+                    "category": "entertainment",
+                    "duration_hrs": 2.0,
+                    "cost": 18.81,
+                    "rating": 4.3,
+                    "open_time": "10:00",
+                    "close_time": "21:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"indoor\", \"adults\", \"evening\", \"group\"]"
+                  },
+                  {
+                    "activity_id": "AC000439",
+                    "name": "Miami Children's Museum",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 2.5,
+                    "cost": 19.86,
+                    "rating": 4.7,
+                    "open_time": "10:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"indoor\", \"family\", \"kids\", \"education\"]"
+                  },
+                  {
+                    "activity_id": "AC000438",
+                    "name": "Miami Planetarium Show",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 1.5,
+                    "cost": 21.57,
+                    "rating": 3.6,
+                    "open_time": "09:00",
+                    "close_time": "17:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"indoor\", \"family\", \"education\", \"science\"]"
+                  },
+                  {
+                    "activity_id": "AC000432",
+                    "name": "Miami Live Music Venue",
+                    "city": "Miami",
+                    "category": "nightlife",
+                    "duration_hrs": 2.5,
+                    "cost": 25.83,
+                    "rating": 4.5,
+                    "open_time": "18:00",
+                    "close_time": "02:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Wed\"]",
+                    "tags": "[\"music\", \"adults\", \"evening\", \"nightlife\"]"
+                  },
+                  {
+                    "activity_id": "AC000424",
+                    "name": "Street Art Tour Miami",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 2.0,
+                    "cost": 26.68,
+                    "rating": 3.7,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"outdoor\", \"walking\", \"art\", \"culture\"]"
+                  },
+                  {
+                    "activity_id": "AC000435",
+                    "name": "Miami Yoga in the Park",
+                    "city": "Miami",
+                    "category": "wellness",
+                    "duration_hrs": 1.5,
+                    "cost": 29.07,
+                    "rating": 5.0,
+                    "open_time": "07:00",
+                    "close_time": "13:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"outdoor\", \"morning\", \"active\", \"family\"]"
+                  },
+                  {
+                    "activity_id": "AC000423",
+                    "name": "Architecture Walk Miami",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 2.0,
+                    "cost": 30.08,
+                    "rating": 4.8,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"walking\", \"outdoor\", \"history\", \"culture\"]"
+                  },
+                  {
+                    "activity_id": "AC000403",
+                    "name": "Miami Contemporary Art Gall.",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 2.0,
+                    "cost": 30.35,
+                    "rating": 4.7,
+                    "open_time": "10:00",
+                    "close_time": "18:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"art\", \"indoor\", \"adults\", \"culture\"]"
+                  },
+                  {
+                    "activity_id": "AC000400",
+                    "name": "Miami Art Museum",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 3.0,
+                    "cost": 31.16,
+                    "rating": 4.6,
+                    "open_time": "11:00",
+                    "close_time": "20:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"art\", \"indoor\", \"family\", \"culture\"]"
+                  },
+                  {
+                    "activity_id": "AC000451",
+                    "name": "Miami Night Market",
+                    "city": "Miami",
+                    "category": "food",
+                    "duration_hrs": 2.0,
+                    "cost": 31.24,
+                    "rating": 4.7,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"food\", \"outdoor\", \"evening\", \"family\"]"
+                  },
+                  {
+                    "activity_id": "AC000452",
+                    "name": "Miami Scenic Drive Tour",
+                    "city": "Miami",
+                    "category": "sightseeing",
+                    "duration_hrs": 3.0,
+                    "cost": 35.8,
+                    "rating": 4.4,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"outdoor\", \"scenic\", \"family\"]"
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 2973,
+                  "output_tokens": 399
+                }
+              },
+              {
+                "turn": 2,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-23",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 5859,
+                  "output_tokens": 355
+                }
+              },
+              {
+                "turn": 2,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-25",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 5859,
+                  "output_tokens": 355
+                }
+              },
+              {
+                "turn": 2,
+                "tool": "search_hotels",
+                "input": {
+                  "city": "Miami",
+                  "check_in": "2025-06-10",
+                  "check_out": "2025-06-23",
+                  "max_results": 15
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 5859,
+                  "output_tokens": 355
+                }
+              },
+              {
+                "turn": 3,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-11",
+                  "max_results": 10
+                },
+                "output": [
+                  {
+                    "flight_id": "FL00002073",
+                    "airline_iata": "B6",
+                    "flight_number": "B68794",
+                    "origin_city": "Miami",
+                    "destination_city": "Chicago",
+                    "origin_iata": "MIA",
+                    "destination_iata": "ORD",
+                    "depart_date": "2025-06-11",
+                    "depart_time": "06:40",
+                    "arrive_time": "09:34",
+                    "duration_hours": 2.91,
+                    "price": 202.65,
+                    "seats_available": 135,
+                    "stops": 1,
+                    "layover_airport": "JAX",
+                    "layover_minutes": 62,
+                    "cabin": "economy"
+                  },
+                  {
+                    "flight_id": "FL00002074",
+                    "airline_iata": "UA",
+                    "flight_number": "UA2614",
+                    "origin_city": "Miami",
+                    "destination_city": "Chicago",
+                    "origin_iata": "MIA",
+                    "destination_iata": "ORD",
+                    "depart_date": "2025-06-11",
+                    "depart_time": "11:25",
+                    "arrive_time": "14:34",
+                    "duration_hours": 3.15,
+                    "price": 318.27,
+                    "seats_available": 128,
+                    "stops": 0,
+                    "layover_airport": null,
+                    "layover_minutes": null,
+                    "cabin": "economy"
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 6305,
+                  "output_tokens": 435
+                }
+              },
+              {
+                "turn": 3,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-17",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 6305,
+                  "output_tokens": 435
+                }
+              },
+              {
+                "turn": 3,
+                "tool": "search_hotels",
+                "input": {
+                  "city": "Miami",
+                  "check_in": "2025-06-10",
+                  "check_out": "2025-06-17",
+                  "max_results": 15
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 6305,
+                  "output_tokens": 435
+                }
+              },
+              {
+                "turn": 3,
+                "tool": "search_hotels",
+                "input": {
+                  "city": "Miami",
+                  "check_in": "2025-06-10",
+                  "check_out": "2025-06-12",
+                  "max_results": 15
+                },
+                "output": [
+                  {
+                    "hotel_id": "HT00190",
+                    "name": "Miami Grand Motel 6",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Motel 6",
+                    "tier": "economy",
+                    "price_per_night": 88.81,
+                    "rating": 3.4,
+                    "num_reviews": 3443,
+                    "amenities": "[\"wifi\", \"parking\"]",
+                    "distance_miles": 17.4
+                  },
+                  {
+                    "hotel_id": "HT00173",
+                    "name": "The Miami Motel 6",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Motel 6",
+                    "tier": "economy",
+                    "price_per_night": 103.31,
+                    "rating": 3.3,
+                    "num_reviews": 1330,
+                    "amenities": "[\"wifi\", \"parking\"]",
+                    "distance_miles": 5.9
+                  },
+                  {
+                    "hotel_id": "HT00189",
+                    "name": "The Miami La Quinta",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "La Quinta",
+                    "tier": "economy",
+                    "price_per_night": 144.14,
+                    "rating": 2.5,
+                    "num_reviews": 4446,
+                    "amenities": "[\"pool\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 19.9
+                  },
+                  {
+                    "hotel_id": "HT00171",
+                    "name": "Extended Stay Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Extended Stay",
+                    "tier": "economy",
+                    "price_per_night": 148.69,
+                    "rating": 3.6,
+                    "num_reviews": 4260,
+                    "amenities": "[\"wifi\", \"kitchen\", \"parking\"]",
+                    "distance_miles": 7.1
+                  },
+                  {
+                    "hotel_id": "HT00186",
+                    "name": "La Quinta Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "La Quinta",
+                    "tier": "economy",
+                    "price_per_night": 158.48,
+                    "rating": 3.2,
+                    "num_reviews": 45,
+                    "amenities": "[\"pool\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 1.9
+                  },
+                  {
+                    "hotel_id": "HT00184",
+                    "name": "Fairfield Inn Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Fairfield Inn",
+                    "tier": "midscale",
+                    "price_per_night": 229.29,
+                    "rating": 3.8,
+                    "num_reviews": 6931,
+                    "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 3.3
+                  },
+                  {
+                    "hotel_id": "HT00194",
+                    "name": "Fairfield Inn Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Fairfield Inn",
+                    "tier": "midscale",
+                    "price_per_night": 240.95,
+                    "rating": 4.3,
+                    "num_reviews": 6960,
+                    "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 14.4
+                  },
+                  {
+                    "hotel_id": "HT00178",
+                    "name": "DoubleTree Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "DoubleTree",
+                    "tier": "midscale",
+                    "price_per_night": 243.65,
+                    "rating": 4.3,
+                    "num_reviews": 1098,
+                    "amenities": "[\"pool\", \"gym\", \"wifi\", \"parking\", \"bar\"]",
+                    "distance_miles": 7.6
+                  },
+                  {
+                    "hotel_id": "HT00185",
+                    "name": "Hotel 203 Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Radisson",
+                    "tier": "midscale",
+                    "price_per_night": 285.05,
+                    "rating": 3.9,
+                    "num_reviews": 2525,
+                    "amenities": "[\"pool\", \"gym\", \"restaurant\", \"wifi\", \"parking\"]",
+                    "distance_miles": 8.3
+                  },
+                  {
+                    "hotel_id": "HT00181",
+                    "name": "Radisson Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Radisson",
+                    "tier": "midscale",
+                    "price_per_night": 311.93,
+                    "rating": 4.1,
+                    "num_reviews": 1475,
+                    "amenities": "[\"pool\", \"gym\", \"restaurant\", \"wifi\", \"parking\"]",
+                    "distance_miles": 5.1
+                  },
+                  {
+                    "hotel_id": "HT00177",
+                    "name": "The Miami DoubleTree",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "DoubleTree",
+                    "tier": "midscale",
+                    "price_per_night": 360.85,
+                    "rating": 4.2,
+                    "num_reviews": 7208,
+                    "amenities": "[\"pool\", \"gym\", \"wifi\", \"parking\", \"bar\"]",
+                    "distance_miles": 10.7
+                  },
+                  {
+                    "hotel_id": "HT00187",
+                    "name": "The Miami Autograph Coll.",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Autograph Coll.",
+                    "tier": "upscale",
+                    "price_per_night": 372.11,
+                    "rating": 3.9,
+                    "num_reviews": 4048,
+                    "amenities": "[\"pool\", \"gym\", \"restaurant\", \"wifi\", \"bar\", \"spa\"]",
+                    "distance_miles": 8.8
+                  },
+                  {
+                    "hotel_id": "HT00183",
+                    "name": "Miami Grand Hyatt Regency",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Hyatt Regency",
+                    "tier": "upscale",
+                    "price_per_night": 418.97,
+                    "rating": 4.4,
+                    "num_reviews": 5990,
+                    "amenities": "[\"pool\", \"gym\", \"spa\", \"restaurant\", \"wifi\", \"bar\"]",
+                    "distance_miles": 12.9
+                  },
+                  {
+                    "hotel_id": "HT00191",
+                    "name": "Marriott Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Marriott",
+                    "tier": "luxury",
+                    "price_per_night": 451.1,
+                    "rating": 4.8,
+                    "num_reviews": 813,
+                    "amenities": "[\"pool\", \"gym\", \"spa\", \"restaurant\", \"wifi\", \"parking\", \"bar\", \"concierge\"]",
+                    "distance_miles": 4.7
+                  },
+                  {
+                    "hotel_id": "HT00180",
+                    "name": "The Miami Hyatt Regency",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Hyatt Regency",
+                    "tier": "upscale",
+                    "price_per_night": 473.14,
+                    "rating": 4.4,
+                    "num_reviews": 2182,
+                    "amenities": "[\"pool\", \"gym\", \"spa\", \"restaurant\", \"wifi\", \"bar\"]",
+                    "distance_miles": 19.4
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 6305,
+                  "output_tokens": 435
+                }
+              },
+              {
+                "turn": 4,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-12",
+                  "max_results": 10
+                },
+                "output": [
+                  {
+                    "flight_id": "FL00002075",
+                    "airline_iata": "NK",
+                    "flight_number": "NK9964",
+                    "origin_city": "Miami",
+                    "destination_city": "Chicago",
+                    "origin_iata": "MIA",
+                    "destination_iata": "ORD",
+                    "depart_date": "2025-06-12",
+                    "depart_time": "18:10",
+                    "arrive_time": "21:01",
+                    "duration_hours": 2.86,
+                    "price": 217.04,
+                    "seats_available": 83,
+                    "stops": 0,
+                    "layover_airport": null,
+                    "layover_minutes": null,
+                    "cabin": "business"
+                  },
+                  {
+                    "flight_id": "FL00002076",
+                    "airline_iata": "DL",
+                    "flight_number": "DL6593",
+                    "origin_city": "Miami",
+                    "destination_city": "Chicago",
+                    "origin_iata": "MIA",
+                    "destination_iata": "ORD",
+                    "depart_date": "2025-06-12",
+                    "depart_time": "19:55",
+                    "arrive_time": "22:49",
+                    "duration_hours": 2.9,
+                    "price": 313.45,
+                    "seats_available": 143,
+                    "stops": 1,
+                    "layover_airport": "ABQ",
+                    "layover_minutes": 100,
+                    "cabin": "economy"
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 8925,
+                  "output_tokens": 447
+                }
+              },
+              {
+                "turn": 4,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-13",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 8925,
+                  "output_tokens": 447
+                }
+              },
+              {
+                "turn": 4,
+                "tool": "search_hotels",
+                "input": {
+                  "city": "Miami",
+                  "check_in": "2025-06-10",
+                  "check_out": "2025-06-13",
+                  "max_results": 15
+                },
+                "output": [
+                  {
+                    "hotel_id": "HT00190",
+                    "name": "Miami Grand Motel 6",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Motel 6",
+                    "tier": "economy",
+                    "price_per_night": 88.81,
+                    "rating": 3.4,
+                    "num_reviews": 3443,
+                    "amenities": "[\"wifi\", \"parking\"]",
+                    "distance_miles": 17.4
+                  },
+                  {
+                    "hotel_id": "HT00173",
+                    "name": "The Miami Motel 6",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Motel 6",
+                    "tier": "economy",
+                    "price_per_night": 103.31,
+                    "rating": 3.3,
+                    "num_reviews": 1330,
+                    "amenities": "[\"wifi\", \"parking\"]",
+                    "distance_miles": 5.9
+                  },
+                  {
+                    "hotel_id": "HT00189",
+                    "name": "The Miami La Quinta",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "La Quinta",
+                    "tier": "economy",
+                    "price_per_night": 144.14,
+                    "rating": 2.5,
+                    "num_reviews": 4446,
+                    "amenities": "[\"pool\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 19.9
+                  },
+                  {
+                    "hotel_id": "HT00171",
+                    "name": "Extended Stay Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Extended Stay",
+                    "tier": "economy",
+                    "price_per_night": 148.69,
+                    "rating": 3.6,
+                    "num_reviews": 4260,
+                    "amenities": "[\"wifi\", \"kitchen\", \"parking\"]",
+                    "distance_miles": 7.1
+                  },
+                  {
+                    "hotel_id": "HT00186",
+                    "name": "La Quinta Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "La Quinta",
+                    "tier": "economy",
+                    "price_per_night": 158.48,
+                    "rating": 3.2,
+                    "num_reviews": 45,
+                    "amenities": "[\"pool\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 1.9
+                  },
+                  {
+                    "hotel_id": "HT00184",
+                    "name": "Fairfield Inn Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Fairfield Inn",
+                    "tier": "midscale",
+                    "price_per_night": 229.29,
+                    "rating": 3.8,
+                    "num_reviews": 6931,
+                    "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 3.3
+                  },
+                  {
+                    "hotel_id": "HT00194",
+                    "name": "Fairfield Inn Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Fairfield Inn",
+                    "tier": "midscale",
+                    "price_per_night": 240.95,
+                    "rating": 4.3,
+                    "num_reviews": 6960,
+                    "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 14.4
+                  },
+                  {
+                    "hotel_id": "HT00178",
+                    "name": "DoubleTree Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "DoubleTree",
+                    "tier": "midscale",
+                    "price_per_night": 243.65,
+                    "rating": 4.3,
+                    "num_reviews": 1098,
+                    "amenities": "[\"pool\", \"gym\", \"wifi\", \"parking\", \"bar\"]",
+                    "distance_miles": 7.6
+                  },
+                  {
+                    "hotel_id": "HT00181",
+                    "name": "Radisson Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Radisson",
+                    "tier": "midscale",
+                    "price_per_night": 311.93,
+                    "rating": 4.1,
+                    "num_reviews": 1475,
+                    "amenities": "[\"pool\", \"gym\", \"restaurant\", \"wifi\", \"parking\"]",
+                    "distance_miles": 5.1
+                  },
+                  {
+                    "hotel_id": "HT00187",
+                    "name": "The Miami Autograph Coll.",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Autograph Coll.",
+                    "tier": "upscale",
+                    "price_per_night": 372.11,
+                    "rating": 3.9,
+                    "num_reviews": 4048,
+                    "amenities": "[\"pool\", \"gym\", \"restaurant\", \"wifi\", \"bar\", \"spa\"]",
+                    "distance_miles": 8.8
+                  },
+                  {
+                    "hotel_id": "HT00183",
+                    "name": "Miami Grand Hyatt Regency",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Hyatt Regency",
+                    "tier": "upscale",
+                    "price_per_night": 418.97,
+                    "rating": 4.4,
+                    "num_reviews": 5990,
+                    "amenities": "[\"pool\", \"gym\", \"spa\", \"restaurant\", \"wifi\", \"bar\"]",
+                    "distance_miles": 12.9
+                  },
+                  {
+                    "hotel_id": "HT00191",
+                    "name": "Marriott Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Marriott",
+                    "tier": "luxury",
+                    "price_per_night": 451.1,
+                    "rating": 4.8,
+                    "num_reviews": 813,
+                    "amenities": "[\"pool\", \"gym\", \"spa\", \"restaurant\", \"wifi\", \"parking\", \"bar\", \"concierge\"]",
+                    "distance_miles": 4.7
+                  },
+                  {
+                    "hotel_id": "HT00180",
+                    "name": "The Miami Hyatt Regency",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Hyatt Regency",
+                    "tier": "upscale",
+                    "price_per_night": 473.14,
+                    "rating": 4.4,
+                    "num_reviews": 2182,
+                    "amenities": "[\"pool\", \"gym\", \"spa\", \"restaurant\", \"wifi\", \"bar\"]",
+                    "distance_miles": 19.4
+                  },
+                  {
+                    "hotel_id": "HT00182",
+                    "name": "Hotel 477 Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Autograph Coll.",
+                    "tier": "upscale",
+                    "price_per_night": 482.09,
+                    "rating": 3.9,
+                    "num_reviews": 2458,
+                    "amenities": "[\"pool\", \"gym\", \"restaurant\", \"wifi\", \"bar\", \"spa\"]",
+                    "distance_miles": 14.8
+                  },
+                  {
+                    "hotel_id": "HT00188",
+                    "name": "Hyatt Regency Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Hyatt Regency",
+                    "tier": "upscale",
+                    "price_per_night": 595.89,
+                    "rating": 4.6,
+                    "num_reviews": 2108,
+                    "amenities": "[\"pool\", \"gym\", \"spa\", \"restaurant\", \"wifi\", \"bar\"]",
+                    "distance_miles": 14.3
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 8925,
+                  "output_tokens": 447
+                }
+              },
+              {
+                "turn": 4,
+                "tool": "search_hotels",
+                "input": {
+                  "city": "Miami",
+                  "check_in": "2025-06-10",
+                  "check_out": "2025-06-14",
+                  "max_results": 15
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 8925,
+                  "output_tokens": 447
+                }
+              },
+              {
+                "turn": 5,
+                "tool": "search_hotels",
+                "input": {
+                  "city": "Miami",
+                  "check_in": "2025-06-10",
+                  "check_out": "2025-06-15",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 11572,
+                  "output_tokens": 462
+                }
+              },
+              {
+                "turn": 5,
+                "tool": "search_hotels",
+                "input": {
+                  "city": "Miami",
+                  "check_in": "2025-06-10",
+                  "check_out": "2025-06-20",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 11572,
+                  "output_tokens": 462
+                }
+              },
+              {
+                "turn": 5,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-14",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 11572,
+                  "output_tokens": 462
+                }
+              },
+              {
+                "turn": 5,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-15",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 11572,
+                  "output_tokens": 462
+                }
+              },
+              {
+                "turn": 6,
+                "tool": "calculate_total_cost",
+                "input": {
+                  "flight_ids": [
+                    "FL00000625",
+                    "FL00002075"
+                  ],
+                  "hotel_id": "HT00190",
+                  "hotel_nights": 2,
+                  "activity_ids": [
+                    "AC000415",
+                    "AC000412",
+                    "AC000423",
+                    "AC000432",
+                    "AC000451"
+                  ]
+                },
+                "output": {
+                  "flights": 452.86,
+                  "hotel": 177.62,
+                  "activities": 106.17999999999999,
+                  "total": 736.66
+                },
+                "tokens": {
+                  "input_tokens": 12151,
+                  "output_tokens": 240
+                }
+              },
+              {
+                "turn": 7,
+                "tool": "submit_itinerary",
+                "input": {
+                  "flights": [
+                    {
+                      "id": "FL00000625",
+                      "reason": "Affordable nonstop evening flight from Chicago to Miami on your requested arrival date (June 10th)"
+                    },
+                    {
+                      "id": "FL00002075",
+                      "reason": "Nonstop business class return flight at a reasonable price, departing June 12th"
+                    }
+                  ],
+                  "hotels": [
+                    {
+                      "id": "HT00190",
+                      "reason": "Most affordable option at $88.81/night with essential amenities (wifi, parking) and decent 3.4 rating"
+                    }
+                  ],
+                  "hotel_nights": 2,
+                  "check_in": "2025-06-10",
+                  "check_out": "2025-06-12",
+                  "activities": [
+                    {
+                      "id": "AC000415",
+                      "reason": "Free outdoor adventure at Miami State Park with 4.3 rating - great for exploring nature"
+                    },
+                    {
+                      "id": "AC000412",
+                      "reason": "Highly rated (4.6) Miami Botanical Garden for a relaxing nature experience"
+                    },
+                    {
+                      "id": "AC000423",
+                      "reason": "Excellent 4.8-rated Architecture Walk to explore Miami's culture and history"
+                    },
+                    {
+                      "id": "AC000432",
+                      "reason": "Highly rated (4.5) live music venue to experience Miami's nightlife"
+                    },
+                    {
+                      "id": "AC000451",
+                      "reason": "Popular 4.7-rated Night Market for authentic Miami food and evening atmosphere"
+                    }
+                  ],
+                  "total_cost": 736.66,
+                  "message": "I apologize, but I have some important limitations to share about your requested 2-week Miami trip:\n\n**DATA AVAILABILITY ISSUE:**\nUnfortunately, the booking system has very limited availability for your dates. I could only find:\n- Hotels available for a maximum of 3 nights (June 10-13)\n- Return flights only available on June 11th or 12th\n- No availability for a full 2-week stay\n\n**ALTERNATIVE ITINERARY (2 nights, June 10-12):**\nI've created a shorter trip that's well within your $5,000 budget at just $736.66:\n\n\u2708\ufe0f **Flights:** $452.86\n- Outbound: Southwest nonstop on June 10th (5:10 PM - 8:17 PM)\n- Return: Spirit business class nonstop on June 12th (6:10 PM - 9:01 PM)\n\n\ud83c\udfe8 **Hotel:** Miami Grand Motel 6 - $177.62 (2 nights @ $88.81/night)\n- Budget-friendly with wifi and parking\n\n\ud83c\udfaf **Activities:** $106.18\n- Miami State Park Hike (free!)\n- Miami Botanical Garden\n- Architecture Walk\n- Live Music Venue\n- Miami Night Market\n\n**RECOMMENDATION:**\nWould you like me to help you find a 2-week trip during different dates when more availability exists? Or would you prefer to proceed with this shorter 2-night Miami getaway and save significantly on your budget?"
+                },
+                "output": "PASS",
+                "tokens": {
+                  "input_tokens": 12438,
+                  "output_tokens": 889
+                }
+              }
+            ],
+            "output": {
+              "flights": [
+                {
+                  "id": "FL00000625",
+                  "reason": "Affordable nonstop evening flight from Chicago to Miami on your requested arrival date (June 10th)"
+                },
+                {
+                  "id": "FL00002075",
+                  "reason": "Nonstop business class return flight at a reasonable price, departing June 12th"
+                }
+              ],
+              "hotels": [
+                {
+                  "id": "HT00190",
+                  "reason": "Most affordable option at $88.81/night with essential amenities (wifi, parking) and decent 3.4 rating"
+                }
+              ],
+              "activities": [
+                {
+                  "id": "AC000415",
+                  "reason": "Free outdoor adventure at Miami State Park with 4.3 rating - great for exploring nature"
+                },
+                {
+                  "id": "AC000412",
+                  "reason": "Highly rated (4.6) Miami Botanical Garden for a relaxing nature experience"
+                },
+                {
+                  "id": "AC000423",
+                  "reason": "Excellent 4.8-rated Architecture Walk to explore Miami's culture and history"
+                },
+                {
+                  "id": "AC000432",
+                  "reason": "Highly rated (4.5) live music venue to experience Miami's nightlife"
+                },
+                {
+                  "id": "AC000451",
+                  "reason": "Popular 4.7-rated Night Market for authentic Miami food and evening atmosphere"
+                }
+              ],
+              "total_cost": 736.66,
+              "check_in": "2025-06-10",
+              "check_out": "2025-06-12",
+              "hotel_nights": 2
+            },
+            "message": "I apologize, but I have some important limitations to share about your requested 2-week Miami trip:\n\n**DATA AVAILABILITY ISSUE:**\nUnfortunately, the booking system has very limited availability for your dates. I could only find:\n- Hotels available for a maximum of 3 nights (June 10-13)\n- Return flights only available on June 11th or 12th\n- No availability for a full 2-week stay\n\n**ALTERNATIVE ITINERARY (2 nights, June 10-12):**\nI've created a shorter trip that's well within your $5,000 budget at just $736.66:\n\n\u2708\ufe0f **Flights:** $452.86\n- Outbound: Southwest nonstop on June 10th (5:10 PM - 8:17 PM)\n- Return: Spirit business class nonstop on June 12th (6:10 PM - 9:01 PM)\n\n\ud83c\udfe8 **Hotel:** Miami Grand Motel 6 - $177.62 (2 nights @ $88.81/night)\n- Budget-friendly with wifi and parking\n\n\ud83c\udfaf **Activities:** $106.18\n- Miami State Park Hike (free!)\n- Miami Botanical Garden\n- Architecture Walk\n- Live Music Venue\n- Miami Night Market\n\n**RECOMMENDATION:**\nWould you like me to help you find a 2-week trip during different dates when more availability exists? Or would you prefer to proceed with this shorter 2-night Miami getaway and save significantly on your budget?",
+            "error": null,
+            "scores": {
+              "constraint_satisfaction": 0.75,
+              "budget_efficiency": 1.0,
+              "logistics_score": 1.0,
+              "evaluation_score": 0.875,
+              "passed": true
+            },
+            "score_details": {
+              "constraint_satisfaction": {
+                "has_flight": true,
+                "has_hotel": true,
+                "correct_dates": false,
+                "correct_destination": true,
+                "has_availability": true,
+                "within_budget": true,
+                "budget_used": 736.66,
+                "budget_limit": 5000,
+                "long_hotel_stay": false,
+                "expected_nights": 13,
+                "actual_nights": 2,
+                "has_multiple_activities": true,
+                "min_activities": 5,
+                "actual_activities": 5,
+                "met_constraints": 6,
+                "total_constraints": 8
+              },
+              "budget_efficiency": {
+                "agent_cost": 736.66,
+                "optimal_cost": 736.66,
+                "budget_source": "task_constraint",
+                "budget": 5000,
+                "over_budget": false
+              },
+              "logistics": {
+                "violations": [],
+                "violation_count": 0
+              }
+            }
+          },
+          {
+            "run_number": 2,
+            "constraints": {
+              "hard": [
+                "Origin: Chicago",
+                "Destination: Miami, Florida",
+                "Arrival date: June 10th, 2025",
+                "Trip duration: 2 weeks",
+                "Budget: $5,000"
+              ],
+              "soft": [],
+              "assumptions": [
+                "Assuming 1 traveller",
+                "Assuming round-trip travel",
+                "Assuming departure date is approximately June 10th, 2025 and return date is approximately June 24th, 2025 (2 weeks later)",
+                "Assuming budget of $5,000 covers all trip expenses (flights, accommodation, activities, food, etc.)",
+                "Assuming flexible on accommodation type and airline"
+              ]
+            },
+            "trace": [
+              {
+                "step": "parse_constraints",
+                "output": {
+                  "hard": [
+                    "Origin: Chicago",
+                    "Destination: Miami, Florida",
+                    "Arrival date: June 10th, 2025",
+                    "Trip duration: 2 weeks",
+                    "Budget: $5,000"
+                  ],
+                  "soft": [],
+                  "assumptions": [
+                    "Assuming 1 traveller",
+                    "Assuming round-trip travel",
+                    "Assuming departure date is approximately June 10th, 2025 and return date is approximately June 24th, 2025 (2 weeks later)",
+                    "Assuming budget of $5,000 covers all trip expenses (flights, accommodation, activities, food, etc.)",
+                    "Assuming flexible on accommodation type and airline"
+                  ]
+                }
+              },
+              {
+                "turn": 1,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Chicago",
+                  "destination": "Miami",
+                  "date": "2025-06-10",
+                  "max_results": 10
+                },
+                "output": [
+                  {
+                    "flight_id": "FL00000625",
+                    "airline_iata": "WN",
+                    "flight_number": "WN2033",
+                    "origin_city": "Chicago",
+                    "destination_city": "Miami",
+                    "origin_iata": "ORD",
+                    "destination_iata": "MIA",
+                    "depart_date": "2025-06-10",
+                    "depart_time": "17:10",
+                    "arrive_time": "20:17",
+                    "duration_hours": 3.13,
+                    "price": 235.82,
+                    "seats_available": 95,
+                    "stops": 0,
+                    "layover_airport": null,
+                    "layover_minutes": null,
+                    "cabin": "economy"
+                  },
+                  {
+                    "flight_id": "FL00000626",
+                    "airline_iata": "DL",
+                    "flight_number": "DL344",
+                    "origin_city": "Chicago",
+                    "destination_city": "Miami",
+                    "origin_iata": "ORD",
+                    "destination_iata": "MIA",
+                    "depart_date": "2025-06-10",
+                    "depart_time": "22:40",
+                    "arrive_time": "01:41",
+                    "duration_hours": 3.02,
+                    "price": 236.44,
+                    "seats_available": 64,
+                    "stops": 0,
+                    "layover_airport": null,
+                    "layover_minutes": null,
+                    "cabin": "economy"
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 2985,
+                  "output_tokens": 399
+                }
+              },
+              {
+                "turn": 1,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-24",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 2985,
+                  "output_tokens": 399
+                }
+              },
+              {
+                "turn": 1,
+                "tool": "search_hotels",
+                "input": {
+                  "city": "Miami",
+                  "check_in": "2025-06-10",
+                  "check_out": "2025-06-24",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 2985,
+                  "output_tokens": 399
+                }
+              },
+              {
+                "turn": 1,
+                "tool": "search_activities",
+                "input": {
+                  "city": "Miami",
+                  "max_results": 15
+                },
+                "output": [
+                  {
+                    "activity_id": "AC000415",
+                    "name": "Miami State Park Hike",
+                    "city": "Miami",
+                    "category": "adventure",
+                    "duration_hrs": 4.0,
+                    "cost": 0.93,
+                    "rating": 4.3,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"outdoor\", \"active\", \"nature\", \"adventure\"]"
+                  },
+                  {
+                    "activity_id": "AC000410",
+                    "name": "Miami Farmers Market",
+                    "city": "Miami",
+                    "category": "food",
+                    "duration_hrs": 2.0,
+                    "cost": 12.25,
+                    "rating": 4.0,
+                    "open_time": "07:00",
+                    "close_time": "13:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"food\", \"outdoor\", \"morning\", \"family\"]"
+                  },
+                  {
+                    "activity_id": "AC000416",
+                    "name": "Miami Waterfall Trail",
+                    "city": "Miami",
+                    "category": "adventure",
+                    "duration_hrs": 3.5,
+                    "cost": 16.54,
+                    "rating": 4.3,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"outdoor\", \"active\", \"nature\", \"adventure\"]"
+                  },
+                  {
+                    "activity_id": "AC000412",
+                    "name": "Miami Botanical Garden",
+                    "city": "Miami",
+                    "category": "nature",
+                    "duration_hrs": 2.0,
+                    "cost": 18.1,
+                    "rating": 4.6,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"nature\", \"outdoor\", \"family\"]"
+                  },
+                  {
+                    "activity_id": "AC000433",
+                    "name": "Miami Trivia Night",
+                    "city": "Miami",
+                    "category": "entertainment",
+                    "duration_hrs": 2.0,
+                    "cost": 18.81,
+                    "rating": 4.3,
+                    "open_time": "10:00",
+                    "close_time": "21:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"indoor\", \"adults\", \"evening\", \"group\"]"
+                  },
+                  {
+                    "activity_id": "AC000439",
+                    "name": "Miami Children's Museum",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 2.5,
+                    "cost": 19.86,
+                    "rating": 4.7,
+                    "open_time": "10:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"indoor\", \"family\", \"kids\", \"education\"]"
+                  },
+                  {
+                    "activity_id": "AC000438",
+                    "name": "Miami Planetarium Show",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 1.5,
+                    "cost": 21.57,
+                    "rating": 3.6,
+                    "open_time": "09:00",
+                    "close_time": "17:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"indoor\", \"family\", \"education\", \"science\"]"
+                  },
+                  {
+                    "activity_id": "AC000432",
+                    "name": "Miami Live Music Venue",
+                    "city": "Miami",
+                    "category": "nightlife",
+                    "duration_hrs": 2.5,
+                    "cost": 25.83,
+                    "rating": 4.5,
+                    "open_time": "18:00",
+                    "close_time": "02:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Wed\"]",
+                    "tags": "[\"music\", \"adults\", \"evening\", \"nightlife\"]"
+                  },
+                  {
+                    "activity_id": "AC000424",
+                    "name": "Street Art Tour Miami",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 2.0,
+                    "cost": 26.68,
+                    "rating": 3.7,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"outdoor\", \"walking\", \"art\", \"culture\"]"
+                  },
+                  {
+                    "activity_id": "AC000435",
+                    "name": "Miami Yoga in the Park",
+                    "city": "Miami",
+                    "category": "wellness",
+                    "duration_hrs": 1.5,
+                    "cost": 29.07,
+                    "rating": 5.0,
+                    "open_time": "07:00",
+                    "close_time": "13:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"outdoor\", \"morning\", \"active\", \"family\"]"
+                  },
+                  {
+                    "activity_id": "AC000423",
+                    "name": "Architecture Walk Miami",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 2.0,
+                    "cost": 30.08,
+                    "rating": 4.8,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"walking\", \"outdoor\", \"history\", \"culture\"]"
+                  },
+                  {
+                    "activity_id": "AC000403",
+                    "name": "Miami Contemporary Art Gall.",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 2.0,
+                    "cost": 30.35,
+                    "rating": 4.7,
+                    "open_time": "10:00",
+                    "close_time": "18:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"art\", \"indoor\", \"adults\", \"culture\"]"
+                  },
+                  {
+                    "activity_id": "AC000400",
+                    "name": "Miami Art Museum",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 3.0,
+                    "cost": 31.16,
+                    "rating": 4.6,
+                    "open_time": "11:00",
+                    "close_time": "20:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"art\", \"indoor\", \"family\", \"culture\"]"
+                  },
+                  {
+                    "activity_id": "AC000451",
+                    "name": "Miami Night Market",
+                    "city": "Miami",
+                    "category": "food",
+                    "duration_hrs": 2.0,
+                    "cost": 31.24,
+                    "rating": 4.7,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"food\", \"outdoor\", \"evening\", \"family\"]"
+                  },
+                  {
+                    "activity_id": "AC000452",
+                    "name": "Miami Scenic Drive Tour",
+                    "city": "Miami",
+                    "category": "sightseeing",
+                    "duration_hrs": 3.0,
+                    "cost": 35.8,
+                    "rating": 4.4,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"outdoor\", \"scenic\", \"family\"]"
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 2985,
+                  "output_tokens": 399
+                }
+              },
+              {
+                "turn": 2,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-23",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 5871,
+                  "output_tokens": 355
+                }
+              },
+              {
+                "turn": 2,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-25",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 5871,
+                  "output_tokens": 355
+                }
+              },
+              {
+                "turn": 2,
+                "tool": "search_hotels",
+                "input": {
+                  "city": "Miami",
+                  "check_in": "2025-06-10",
+                  "check_out": "2025-06-17",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 5871,
+                  "output_tokens": 355
+                }
+              },
+              {
+                "turn": 3,
+                "tool": "search_hotels",
+                "input": {
+                  "city": "Miami",
+                  "max_results": 10
+                },
+                "output": [
+                  {
+                    "hotel_id": "HT00192",
+                    "name": "Motel 6 Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Motel 6",
+                    "tier": "economy",
+                    "price_per_night": 71.84,
+                    "rating": 2.9,
+                    "num_reviews": 7435,
+                    "amenities": "[\"wifi\", \"parking\"]",
+                    "distance_miles": 2.7
+                  },
+                  {
+                    "hotel_id": "HT00190",
+                    "name": "Miami Grand Motel 6",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Motel 6",
+                    "tier": "economy",
+                    "price_per_night": 88.81,
+                    "rating": 3.4,
+                    "num_reviews": 3443,
+                    "amenities": "[\"wifi\", \"parking\"]",
+                    "distance_miles": 17.4
+                  },
+                  {
+                    "hotel_id": "HT00196",
+                    "name": "The Miami Motel 6",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Motel 6",
+                    "tier": "economy",
+                    "price_per_night": 101.53,
+                    "rating": 3.9,
+                    "num_reviews": 657,
+                    "amenities": "[\"wifi\", \"parking\"]",
+                    "distance_miles": 15.7
+                  },
+                  {
+                    "hotel_id": "HT00173",
+                    "name": "The Miami Motel 6",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Motel 6",
+                    "tier": "economy",
+                    "price_per_night": 103.31,
+                    "rating": 3.3,
+                    "num_reviews": 1330,
+                    "amenities": "[\"wifi\", \"parking\"]",
+                    "distance_miles": 5.9
+                  },
+                  {
+                    "hotel_id": "HT00179",
+                    "name": "Extended Stay Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Extended Stay",
+                    "tier": "economy",
+                    "price_per_night": 128.04,
+                    "rating": 2.7,
+                    "num_reviews": 2400,
+                    "amenities": "[\"wifi\", \"kitchen\", \"parking\"]",
+                    "distance_miles": 1.3
+                  },
+                  {
+                    "hotel_id": "HT00193",
+                    "name": "Hampton Inn Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Hampton Inn",
+                    "tier": "midscale",
+                    "price_per_night": 137.45,
+                    "rating": 3.6,
+                    "num_reviews": 1787,
+                    "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 14.0
+                  },
+                  {
+                    "hotel_id": "HT00189",
+                    "name": "The Miami La Quinta",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "La Quinta",
+                    "tier": "economy",
+                    "price_per_night": 144.14,
+                    "rating": 2.5,
+                    "num_reviews": 4446,
+                    "amenities": "[\"pool\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 19.9
+                  },
+                  {
+                    "hotel_id": "HT00197",
+                    "name": "La Quinta Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "La Quinta",
+                    "tier": "economy",
+                    "price_per_night": 145.04,
+                    "rating": 3.1,
+                    "num_reviews": 7264,
+                    "amenities": "[\"pool\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 6.5
+                  },
+                  {
+                    "hotel_id": "HT00171",
+                    "name": "Extended Stay Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Extended Stay",
+                    "tier": "economy",
+                    "price_per_night": 148.69,
+                    "rating": 3.6,
+                    "num_reviews": 4260,
+                    "amenities": "[\"wifi\", \"kitchen\", \"parking\"]",
+                    "distance_miles": 7.1
+                  },
+                  {
+                    "hotel_id": "HT00195",
+                    "name": "Miami Grand Fairfield Inn",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Fairfield Inn",
+                    "tier": "midscale",
+                    "price_per_night": 153.43,
+                    "rating": 3.7,
+                    "num_reviews": 942,
+                    "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 4.4
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 6317,
+                  "output_tokens": 277
+                }
+              },
+              {
+                "turn": 3,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-11",
+                  "max_results": 10
+                },
+                "output": [
+                  {
+                    "flight_id": "FL00002073",
+                    "airline_iata": "B6",
+                    "flight_number": "B68794",
+                    "origin_city": "Miami",
+                    "destination_city": "Chicago",
+                    "origin_iata": "MIA",
+                    "destination_iata": "ORD",
+                    "depart_date": "2025-06-11",
+                    "depart_time": "06:40",
+                    "arrive_time": "09:34",
+                    "duration_hours": 2.91,
+                    "price": 202.65,
+                    "seats_available": 135,
+                    "stops": 1,
+                    "layover_airport": "JAX",
+                    "layover_minutes": 62,
+                    "cabin": "economy"
+                  },
+                  {
+                    "flight_id": "FL00002074",
+                    "airline_iata": "UA",
+                    "flight_number": "UA2614",
+                    "origin_city": "Miami",
+                    "destination_city": "Chicago",
+                    "origin_iata": "MIA",
+                    "destination_iata": "ORD",
+                    "depart_date": "2025-06-11",
+                    "depart_time": "11:25",
+                    "arrive_time": "14:34",
+                    "duration_hours": 3.15,
+                    "price": 318.27,
+                    "seats_available": 128,
+                    "stops": 0,
+                    "layover_airport": null,
+                    "layover_minutes": null,
+                    "cabin": "economy"
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 6317,
+                  "output_tokens": 277
+                }
+              },
+              {
+                "turn": 3,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-12",
+                  "max_results": 10
+                },
+                "output": [
+                  {
+                    "flight_id": "FL00002075",
+                    "airline_iata": "NK",
+                    "flight_number": "NK9964",
+                    "origin_city": "Miami",
+                    "destination_city": "Chicago",
+                    "origin_iata": "MIA",
+                    "destination_iata": "ORD",
+                    "depart_date": "2025-06-12",
+                    "depart_time": "18:10",
+                    "arrive_time": "21:01",
+                    "duration_hours": 2.86,
+                    "price": 217.04,
+                    "seats_available": 83,
+                    "stops": 0,
+                    "layover_airport": null,
+                    "layover_minutes": null,
+                    "cabin": "business"
+                  },
+                  {
+                    "flight_id": "FL00002076",
+                    "airline_iata": "DL",
+                    "flight_number": "DL6593",
+                    "origin_city": "Miami",
+                    "destination_city": "Chicago",
+                    "origin_iata": "MIA",
+                    "destination_iata": "ORD",
+                    "depart_date": "2025-06-12",
+                    "depart_time": "19:55",
+                    "arrive_time": "22:49",
+                    "duration_hours": 2.9,
+                    "price": 313.45,
+                    "seats_available": 143,
+                    "stops": 1,
+                    "layover_airport": "ABQ",
+                    "layover_minutes": 100,
+                    "cabin": "economy"
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 6317,
+                  "output_tokens": 277
+                }
+              },
+              {
+                "turn": 4,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-20",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 8402,
+                  "output_tokens": 379
+                }
+              },
+              {
+                "turn": 4,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-21",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 8402,
+                  "output_tokens": 379
+                }
+              },
+              {
+                "turn": 4,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-22",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 8402,
+                  "output_tokens": 379
+                }
+              },
+              {
+                "turn": 5,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-13",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 8872,
+                  "output_tokens": 403
+                }
+              },
+              {
+                "turn": 5,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-14",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 8872,
+                  "output_tokens": 403
+                }
+              },
+              {
+                "turn": 5,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-15",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 8872,
+                  "output_tokens": 403
+                }
+              },
+              {
+                "turn": 5,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-16",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 8872,
+                  "output_tokens": 403
+                }
+              },
+              {
+                "turn": 6,
+                "tool": "calculate_total_cost",
+                "input": {
+                  "flight_ids": [
+                    "FL00000625",
+                    "FL00002073"
+                  ],
+                  "hotel_id": "HT00192",
+                  "hotel_nights": 1,
+                  "activity_ids": [
+                    "AC000412",
+                    "AC000423",
+                    "AC000432"
+                  ]
+                },
+                "output": {
+                  "flights": 438.47,
+                  "hotel": 71.84,
+                  "activities": 74.00999999999999,
+                  "total": 584.32
+                },
+                "tokens": {
+                  "input_tokens": 9392,
+                  "output_tokens": 206
+                }
+              },
+              {
+                "turn": 7,
+                "tool": "submit_itinerary",
+                "input": {
+                  "flights": [],
+                  "hotels": [],
+                  "activities": [],
+                  "check_in": "",
+                  "check_out": "",
+                  "hotel_nights": 0,
+                  "total_cost": 0,
+                  "message": "I found flights to Miami on June 10th, 2025, and hotels are available, but unfortunately there's a significant issue with your requested dates:\n\n**The Problem:** There are NO return flights available from Miami to Chicago between June 13th-24th, 2025. The only return flights I can find are on June 11th or 12th, which would give you only a 1-2 day trip instead of your requested 2 weeks.\n\n**Available Options:**\n- Outbound: Chicago to Miami on June 10th - $235.82 (Southwest WN2033, departs 5:10 PM)\n- Return options only on:\n  - June 11th: $202.65 (JetBlue with 1 stop) or $318.27 (United nonstop)\n  - June 12th: $217.04 (Spirit nonstop) or $313.45 (Delta with 1 stop)\n\n**What I recommend:**\n1. **Change your travel dates** - Would you like me to search for a different 2-week period in June 2025 when return flights are available?\n2. **Shorten your trip** - If you can only do 1-2 days, I can book that for well under your $5,000 budget.\n3. **Try a different month** - I can search for 2-week trips in May, July, or other months in 2025.\n\nPlease let me know which option works best for you, and I'll create a complete itinerary with flights, hotel, and activities!"
+                },
+                "output": "PASS",
+                "tokens": {
+                  "input_tokens": 9645,
+                  "output_tokens": 534
+                }
+              }
+            ],
+            "output": {
+              "flights": [],
+              "hotels": [],
+              "activities": [],
+              "total_cost": 0,
+              "check_in": "",
+              "check_out": "",
+              "hotel_nights": 0
+            },
+            "message": "I found flights to Miami on June 10th, 2025, and hotels are available, but unfortunately there's a significant issue with your requested dates:\n\n**The Problem:** There are NO return flights available from Miami to Chicago between June 13th-24th, 2025. The only return flights I can find are on June 11th or 12th, which would give you only a 1-2 day trip instead of your requested 2 weeks.\n\n**Available Options:**\n- Outbound: Chicago to Miami on June 10th - $235.82 (Southwest WN2033, departs 5:10 PM)\n- Return options only on:\n  - June 11th: $202.65 (JetBlue with 1 stop) or $318.27 (United nonstop)\n  - June 12th: $217.04 (Spirit nonstop) or $313.45 (Delta with 1 stop)\n\n**What I recommend:**\n1. **Change your travel dates** - Would you like me to search for a different 2-week period in June 2025 when return flights are available?\n2. **Shorten your trip** - If you can only do 1-2 days, I can book that for well under your $5,000 budget.\n3. **Try a different month** - I can search for 2-week trips in May, July, or other months in 2025.\n\nPlease let me know which option works best for you, and I'll create a complete itinerary with flights, hotel, and activities!",
+            "error": null,
+            "scores": {
+              "constraint_satisfaction": 0.125,
+              "budget_efficiency": 1.0,
+              "logistics_score": 1.0,
+              "evaluation_score": 0.5625,
+              "passed": false
+            },
+            "score_details": {
+              "constraint_satisfaction": {
+                "has_flight": false,
+                "has_hotel": false,
+                "has_availability": false,
+                "within_budget": true,
+                "budget_used": 0,
+                "budget_limit": 5000,
+                "long_hotel_stay": false,
+                "expected_nights": 13,
+                "actual_nights": 0,
+                "has_multiple_activities": false,
+                "min_activities": 5,
+                "actual_activities": 0,
+                "met_constraints": 1,
+                "total_constraints": 8
+              },
+              "budget_efficiency": {
+                "agent_cost": 0,
+                "optimal_cost": 0,
+                "budget_source": "task_constraint",
+                "budget": 5000,
+                "over_budget": false
+              },
+              "logistics": {
+                "violations": [],
+                "violation_count": 0
+              }
+            }
+          },
+          {
+            "run_number": 3,
+            "constraints": {
+              "hard": [
+                "Origin: Chicago",
+                "Destination: Miami, Florida",
+                "Arrival date: June 10th, 2025",
+                "Trip duration: 2 weeks",
+                "Budget: $5,000"
+              ],
+              "soft": [],
+              "assumptions": [
+                "Assuming 1 traveller",
+                "Assuming round-trip travel",
+                "Assuming departure date is approximately June 10th, 2025 and return date is approximately June 24th, 2025 (2 weeks later)",
+                "Assuming budget of $5,000 covers all trip expenses (flights, accommodation, activities, food, etc.)",
+                "Assuming flexible on accommodation type and airline"
+              ]
+            },
+            "trace": [
+              {
+                "step": "parse_constraints",
+                "output": {
+                  "hard": [
+                    "Origin: Chicago",
+                    "Destination: Miami, Florida",
+                    "Arrival date: June 10th, 2025",
+                    "Trip duration: 2 weeks",
+                    "Budget: $5,000"
+                  ],
+                  "soft": [],
+                  "assumptions": [
+                    "Assuming 1 traveller",
+                    "Assuming round-trip travel",
+                    "Assuming departure date is approximately June 10th, 2025 and return date is approximately June 24th, 2025 (2 weeks later)",
+                    "Assuming budget of $5,000 covers all trip expenses (flights, accommodation, activities, food, etc.)",
+                    "Assuming flexible on accommodation type and airline"
+                  ]
+                }
+              },
+              {
+                "turn": 1,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Chicago",
+                  "destination": "Miami",
+                  "date": "2025-06-10",
+                  "max_results": 10
+                },
+                "output": [
+                  {
+                    "flight_id": "FL00000625",
+                    "airline_iata": "WN",
+                    "flight_number": "WN2033",
+                    "origin_city": "Chicago",
+                    "destination_city": "Miami",
+                    "origin_iata": "ORD",
+                    "destination_iata": "MIA",
+                    "depart_date": "2025-06-10",
+                    "depart_time": "17:10",
+                    "arrive_time": "20:17",
+                    "duration_hours": 3.13,
+                    "price": 235.82,
+                    "seats_available": 95,
+                    "stops": 0,
+                    "layover_airport": null,
+                    "layover_minutes": null,
+                    "cabin": "economy"
+                  },
+                  {
+                    "flight_id": "FL00000626",
+                    "airline_iata": "DL",
+                    "flight_number": "DL344",
+                    "origin_city": "Chicago",
+                    "destination_city": "Miami",
+                    "origin_iata": "ORD",
+                    "destination_iata": "MIA",
+                    "depart_date": "2025-06-10",
+                    "depart_time": "22:40",
+                    "arrive_time": "01:41",
+                    "duration_hours": 3.02,
+                    "price": 236.44,
+                    "seats_available": 64,
+                    "stops": 0,
+                    "layover_airport": null,
+                    "layover_minutes": null,
+                    "cabin": "economy"
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 2985,
+                  "output_tokens": 399
+                }
+              },
+              {
+                "turn": 1,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-24",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 2985,
+                  "output_tokens": 399
+                }
+              },
+              {
+                "turn": 1,
+                "tool": "search_hotels",
+                "input": {
+                  "city": "Miami",
+                  "check_in": "2025-06-10",
+                  "check_out": "2025-06-24",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 2985,
+                  "output_tokens": 399
+                }
+              },
+              {
+                "turn": 1,
+                "tool": "search_activities",
+                "input": {
+                  "city": "Miami",
+                  "max_results": 15
+                },
+                "output": [
+                  {
+                    "activity_id": "AC000415",
+                    "name": "Miami State Park Hike",
+                    "city": "Miami",
+                    "category": "adventure",
+                    "duration_hrs": 4.0,
+                    "cost": 0.93,
+                    "rating": 4.3,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"outdoor\", \"active\", \"nature\", \"adventure\"]"
+                  },
+                  {
+                    "activity_id": "AC000410",
+                    "name": "Miami Farmers Market",
+                    "city": "Miami",
+                    "category": "food",
+                    "duration_hrs": 2.0,
+                    "cost": 12.25,
+                    "rating": 4.0,
+                    "open_time": "07:00",
+                    "close_time": "13:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"food\", \"outdoor\", \"morning\", \"family\"]"
+                  },
+                  {
+                    "activity_id": "AC000416",
+                    "name": "Miami Waterfall Trail",
+                    "city": "Miami",
+                    "category": "adventure",
+                    "duration_hrs": 3.5,
+                    "cost": 16.54,
+                    "rating": 4.3,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"outdoor\", \"active\", \"nature\", \"adventure\"]"
+                  },
+                  {
+                    "activity_id": "AC000412",
+                    "name": "Miami Botanical Garden",
+                    "city": "Miami",
+                    "category": "nature",
+                    "duration_hrs": 2.0,
+                    "cost": 18.1,
+                    "rating": 4.6,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"nature\", \"outdoor\", \"family\"]"
+                  },
+                  {
+                    "activity_id": "AC000433",
+                    "name": "Miami Trivia Night",
+                    "city": "Miami",
+                    "category": "entertainment",
+                    "duration_hrs": 2.0,
+                    "cost": 18.81,
+                    "rating": 4.3,
+                    "open_time": "10:00",
+                    "close_time": "21:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"indoor\", \"adults\", \"evening\", \"group\"]"
+                  },
+                  {
+                    "activity_id": "AC000439",
+                    "name": "Miami Children's Museum",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 2.5,
+                    "cost": 19.86,
+                    "rating": 4.7,
+                    "open_time": "10:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"indoor\", \"family\", \"kids\", \"education\"]"
+                  },
+                  {
+                    "activity_id": "AC000438",
+                    "name": "Miami Planetarium Show",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 1.5,
+                    "cost": 21.57,
+                    "rating": 3.6,
+                    "open_time": "09:00",
+                    "close_time": "17:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"indoor\", \"family\", \"education\", \"science\"]"
+                  },
+                  {
+                    "activity_id": "AC000432",
+                    "name": "Miami Live Music Venue",
+                    "city": "Miami",
+                    "category": "nightlife",
+                    "duration_hrs": 2.5,
+                    "cost": 25.83,
+                    "rating": 4.5,
+                    "open_time": "18:00",
+                    "close_time": "02:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Wed\"]",
+                    "tags": "[\"music\", \"adults\", \"evening\", \"nightlife\"]"
+                  },
+                  {
+                    "activity_id": "AC000424",
+                    "name": "Street Art Tour Miami",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 2.0,
+                    "cost": 26.68,
+                    "rating": 3.7,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"outdoor\", \"walking\", \"art\", \"culture\"]"
+                  },
+                  {
+                    "activity_id": "AC000435",
+                    "name": "Miami Yoga in the Park",
+                    "city": "Miami",
+                    "category": "wellness",
+                    "duration_hrs": 1.5,
+                    "cost": 29.07,
+                    "rating": 5.0,
+                    "open_time": "07:00",
+                    "close_time": "13:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"outdoor\", \"morning\", \"active\", \"family\"]"
+                  },
+                  {
+                    "activity_id": "AC000423",
+                    "name": "Architecture Walk Miami",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 2.0,
+                    "cost": 30.08,
+                    "rating": 4.8,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"walking\", \"outdoor\", \"history\", \"culture\"]"
+                  },
+                  {
+                    "activity_id": "AC000403",
+                    "name": "Miami Contemporary Art Gall.",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 2.0,
+                    "cost": 30.35,
+                    "rating": 4.7,
+                    "open_time": "10:00",
+                    "close_time": "18:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"art\", \"indoor\", \"adults\", \"culture\"]"
+                  },
+                  {
+                    "activity_id": "AC000400",
+                    "name": "Miami Art Museum",
+                    "city": "Miami",
+                    "category": "culture",
+                    "duration_hrs": 3.0,
+                    "cost": 31.16,
+                    "rating": 4.6,
+                    "open_time": "11:00",
+                    "close_time": "20:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"art\", \"indoor\", \"family\", \"culture\"]"
+                  },
+                  {
+                    "activity_id": "AC000451",
+                    "name": "Miami Night Market",
+                    "city": "Miami",
+                    "category": "food",
+                    "duration_hrs": 2.0,
+                    "cost": 31.24,
+                    "rating": 4.7,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"food\", \"outdoor\", \"evening\", \"family\"]"
+                  },
+                  {
+                    "activity_id": "AC000452",
+                    "name": "Miami Scenic Drive Tour",
+                    "city": "Miami",
+                    "category": "sightseeing",
+                    "duration_hrs": 3.0,
+                    "cost": 35.8,
+                    "rating": 4.4,
+                    "open_time": "08:00",
+                    "close_time": "19:00",
+                    "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                    "tags": "[\"outdoor\", \"scenic\", \"family\"]"
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 2985,
+                  "output_tokens": 399
+                }
+              },
+              {
+                "turn": 2,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-23",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 5871,
+                  "output_tokens": 307
+                }
+              },
+              {
+                "turn": 2,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-25",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 5871,
+                  "output_tokens": 307
+                }
+              },
+              {
+                "turn": 2,
+                "tool": "search_hotels",
+                "input": {
+                  "city": "Miami",
+                  "max_results": 15
+                },
+                "output": [
+                  {
+                    "hotel_id": "HT00192",
+                    "name": "Motel 6 Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Motel 6",
+                    "tier": "economy",
+                    "price_per_night": 71.84,
+                    "rating": 2.9,
+                    "num_reviews": 7435,
+                    "amenities": "[\"wifi\", \"parking\"]",
+                    "distance_miles": 2.7
+                  },
+                  {
+                    "hotel_id": "HT00190",
+                    "name": "Miami Grand Motel 6",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Motel 6",
+                    "tier": "economy",
+                    "price_per_night": 88.81,
+                    "rating": 3.4,
+                    "num_reviews": 3443,
+                    "amenities": "[\"wifi\", \"parking\"]",
+                    "distance_miles": 17.4
+                  },
+                  {
+                    "hotel_id": "HT00196",
+                    "name": "The Miami Motel 6",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Motel 6",
+                    "tier": "economy",
+                    "price_per_night": 101.53,
+                    "rating": 3.9,
+                    "num_reviews": 657,
+                    "amenities": "[\"wifi\", \"parking\"]",
+                    "distance_miles": 15.7
+                  },
+                  {
+                    "hotel_id": "HT00173",
+                    "name": "The Miami Motel 6",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Motel 6",
+                    "tier": "economy",
+                    "price_per_night": 103.31,
+                    "rating": 3.3,
+                    "num_reviews": 1330,
+                    "amenities": "[\"wifi\", \"parking\"]",
+                    "distance_miles": 5.9
+                  },
+                  {
+                    "hotel_id": "HT00179",
+                    "name": "Extended Stay Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Extended Stay",
+                    "tier": "economy",
+                    "price_per_night": 128.04,
+                    "rating": 2.7,
+                    "num_reviews": 2400,
+                    "amenities": "[\"wifi\", \"kitchen\", \"parking\"]",
+                    "distance_miles": 1.3
+                  },
+                  {
+                    "hotel_id": "HT00193",
+                    "name": "Hampton Inn Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Hampton Inn",
+                    "tier": "midscale",
+                    "price_per_night": 137.45,
+                    "rating": 3.6,
+                    "num_reviews": 1787,
+                    "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 14.0
+                  },
+                  {
+                    "hotel_id": "HT00189",
+                    "name": "The Miami La Quinta",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "La Quinta",
+                    "tier": "economy",
+                    "price_per_night": 144.14,
+                    "rating": 2.5,
+                    "num_reviews": 4446,
+                    "amenities": "[\"pool\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 19.9
+                  },
+                  {
+                    "hotel_id": "HT00197",
+                    "name": "La Quinta Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "La Quinta",
+                    "tier": "economy",
+                    "price_per_night": 145.04,
+                    "rating": 3.1,
+                    "num_reviews": 7264,
+                    "amenities": "[\"pool\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 6.5
+                  },
+                  {
+                    "hotel_id": "HT00171",
+                    "name": "Extended Stay Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Extended Stay",
+                    "tier": "economy",
+                    "price_per_night": 148.69,
+                    "rating": 3.6,
+                    "num_reviews": 4260,
+                    "amenities": "[\"wifi\", \"kitchen\", \"parking\"]",
+                    "distance_miles": 7.1
+                  },
+                  {
+                    "hotel_id": "HT00195",
+                    "name": "Miami Grand Fairfield Inn",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Fairfield Inn",
+                    "tier": "midscale",
+                    "price_per_night": 153.43,
+                    "rating": 3.7,
+                    "num_reviews": 942,
+                    "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 4.4
+                  },
+                  {
+                    "hotel_id": "HT00186",
+                    "name": "La Quinta Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "La Quinta",
+                    "tier": "economy",
+                    "price_per_night": 158.48,
+                    "rating": 3.2,
+                    "num_reviews": 45,
+                    "amenities": "[\"pool\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 1.9
+                  },
+                  {
+                    "hotel_id": "HT00176",
+                    "name": "Holiday Inn Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Holiday Inn",
+                    "tier": "midscale",
+                    "price_per_night": 165.39,
+                    "rating": 4.1,
+                    "num_reviews": 2580,
+                    "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\", \"parking\"]",
+                    "distance_miles": 13.0
+                  },
+                  {
+                    "hotel_id": "HT00184",
+                    "name": "Fairfield Inn Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Fairfield Inn",
+                    "tier": "midscale",
+                    "price_per_night": 229.29,
+                    "rating": 3.8,
+                    "num_reviews": 6931,
+                    "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 3.3
+                  },
+                  {
+                    "hotel_id": "HT00194",
+                    "name": "Fairfield Inn Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "Fairfield Inn",
+                    "tier": "midscale",
+                    "price_per_night": 240.95,
+                    "rating": 4.3,
+                    "num_reviews": 6960,
+                    "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\"]",
+                    "distance_miles": 14.4
+                  },
+                  {
+                    "hotel_id": "HT00178",
+                    "name": "DoubleTree Miami",
+                    "city": "Miami",
+                    "airport_iata": "MIA",
+                    "brand": "DoubleTree",
+                    "tier": "midscale",
+                    "price_per_night": 243.65,
+                    "rating": 4.3,
+                    "num_reviews": 1098,
+                    "amenities": "[\"pool\", \"gym\", \"wifi\", \"parking\", \"bar\"]",
+                    "distance_miles": 7.6
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 5871,
+                  "output_tokens": 307
+                }
+              },
+              {
+                "turn": 3,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-22",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 7921,
+                  "output_tokens": 329
+                }
+              },
+              {
+                "turn": 3,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-21",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 7921,
+                  "output_tokens": 329
+                }
+              },
+              {
+                "turn": 3,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-20",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 7921,
+                  "output_tokens": 329
+                }
+              },
+              {
+                "turn": 4,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-26",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 8341,
+                  "output_tokens": 314
+                }
+              },
+              {
+                "turn": 4,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-27",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 8341,
+                  "output_tokens": 314
+                }
+              },
+              {
+                "turn": 4,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-30",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 8341,
+                  "output_tokens": 314
+                }
+              },
+              {
+                "turn": 5,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Chicago",
+                  "destination": "Miami",
+                  "date": "2025-06-09",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 8746,
+                  "output_tokens": 323
+                }
+              },
+              {
+                "turn": 5,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Chicago",
+                  "destination": "Miami",
+                  "date": "2025-06-11",
+                  "max_results": 10
+                },
+                "output": [
+                  {
+                    "flight_id": "FL00000628",
+                    "airline_iata": "DL",
+                    "flight_number": "DL8731",
+                    "origin_city": "Chicago",
+                    "destination_city": "Miami",
+                    "origin_iata": "ORD",
+                    "destination_iata": "MIA",
+                    "depart_date": "2025-06-11",
+                    "depart_time": "09:25",
+                    "arrive_time": "12:27",
+                    "duration_hours": 3.04,
+                    "price": 293.36,
+                    "seats_available": 69,
+                    "stops": 1,
+                    "layover_airport": "SLC",
+                    "layover_minutes": 107,
+                    "cabin": "economy"
+                  },
+                  {
+                    "flight_id": "FL00000627",
+                    "airline_iata": "UA",
+                    "flight_number": "UA1358",
+                    "origin_city": "Chicago",
+                    "destination_city": "Miami",
+                    "origin_iata": "ORD",
+                    "destination_iata": "MIA",
+                    "depart_date": "2025-06-11",
+                    "depart_time": "06:50",
+                    "arrive_time": "09:44",
+                    "duration_hours": 2.91,
+                    "price": 304.15,
+                    "seats_available": 20,
+                    "stops": 0,
+                    "layover_airport": null,
+                    "layover_minutes": null,
+                    "cabin": "economy"
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 8746,
+                  "output_tokens": 323
+                }
+              },
+              {
+                "turn": 5,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-07-01",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 8746,
+                  "output_tokens": 323
+                }
+              },
+              {
+                "turn": 6,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-15",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 9478,
+                  "output_tokens": 409
+                }
+              },
+              {
+                "turn": 6,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-18",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 9478,
+                  "output_tokens": 409
+                }
+              },
+              {
+                "turn": 6,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-12",
+                  "max_results": 10
+                },
+                "output": [
+                  {
+                    "flight_id": "FL00002075",
+                    "airline_iata": "NK",
+                    "flight_number": "NK9964",
+                    "origin_city": "Miami",
+                    "destination_city": "Chicago",
+                    "origin_iata": "MIA",
+                    "destination_iata": "ORD",
+                    "depart_date": "2025-06-12",
+                    "depart_time": "18:10",
+                    "arrive_time": "21:01",
+                    "duration_hours": 2.86,
+                    "price": 217.04,
+                    "seats_available": 83,
+                    "stops": 0,
+                    "layover_airport": null,
+                    "layover_minutes": null,
+                    "cabin": "business"
+                  },
+                  {
+                    "flight_id": "FL00002076",
+                    "airline_iata": "DL",
+                    "flight_number": "DL6593",
+                    "origin_city": "Miami",
+                    "destination_city": "Chicago",
+                    "origin_iata": "MIA",
+                    "destination_iata": "ORD",
+                    "depart_date": "2025-06-12",
+                    "depart_time": "19:55",
+                    "arrive_time": "22:49",
+                    "duration_hours": 2.9,
+                    "price": 313.45,
+                    "seats_available": 143,
+                    "stops": 1,
+                    "layover_airport": "ABQ",
+                    "layover_minutes": 100,
+                    "cabin": "economy"
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 9478,
+                  "output_tokens": 409
+                }
+              },
+              {
+                "turn": 6,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-11",
+                  "max_results": 10
+                },
+                "output": [
+                  {
+                    "flight_id": "FL00002073",
+                    "airline_iata": "B6",
+                    "flight_number": "B68794",
+                    "origin_city": "Miami",
+                    "destination_city": "Chicago",
+                    "origin_iata": "MIA",
+                    "destination_iata": "ORD",
+                    "depart_date": "2025-06-11",
+                    "depart_time": "06:40",
+                    "arrive_time": "09:34",
+                    "duration_hours": 2.91,
+                    "price": 202.65,
+                    "seats_available": 135,
+                    "stops": 1,
+                    "layover_airport": "JAX",
+                    "layover_minutes": 62,
+                    "cabin": "economy"
+                  },
+                  {
+                    "flight_id": "FL00002074",
+                    "airline_iata": "UA",
+                    "flight_number": "UA2614",
+                    "origin_city": "Miami",
+                    "destination_city": "Chicago",
+                    "origin_iata": "MIA",
+                    "destination_iata": "ORD",
+                    "depart_date": "2025-06-11",
+                    "depart_time": "11:25",
+                    "arrive_time": "14:34",
+                    "duration_hours": 3.15,
+                    "price": 318.27,
+                    "seats_available": 128,
+                    "stops": 0,
+                    "layover_airport": null,
+                    "layover_minutes": null,
+                    "cabin": "economy"
+                  }
+                ],
+                "tokens": {
+                  "input_tokens": 9478,
+                  "output_tokens": 409
+                }
+              },
+              {
+                "turn": 7,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-13",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 10639,
+                  "output_tokens": 442
+                }
+              },
+              {
+                "turn": 7,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-14",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 10639,
+                  "output_tokens": 442
+                }
+              },
+              {
+                "turn": 7,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-16",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 10639,
+                  "output_tokens": 442
+                }
+              },
+              {
+                "turn": 7,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-17",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 10639,
+                  "output_tokens": 442
+                }
+              },
+              {
+                "turn": 8,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-19",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 11198,
+                  "output_tokens": 308
+                }
+              },
+              {
+                "turn": 8,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-28",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 11198,
+                  "output_tokens": 308
+                }
+              },
+              {
+                "turn": 8,
+                "tool": "search_flights",
+                "input": {
+                  "origin": "Miami",
+                  "destination": "Chicago",
+                  "date": "2025-06-29",
+                  "max_results": 10
+                },
+                "output": [],
+                "tokens": {
+                  "input_tokens": 11198,
+                  "output_tokens": 308
+                }
+              },
+              {
+                "turn": 9,
+                "tool": "get_flight_details",
+                "input": {
+                  "flight_id": "FL00000625"
+                },
+                "output": {
+                  "flight_id": "FL00000625",
+                  "airline_iata": "WN",
+                  "flight_number": "WN2033",
+                  "origin": "ORD",
+                  "destination": "MIA",
+                  "depart_date": "2025-06-10",
+                  "depart_time": "17:10",
+                  "arrive_time": "20:17",
+                  "duration_hours": 3.13,
+                  "price": 235.82,
+                  "seats_available": 95,
+                  "stops": 0,
+                  "layover_airport": null,
+                  "layover_minutes": null,
+                  "cabin": "economy",
+                  "origin_city": "Chicago",
+                  "destination_city": "Miami"
+                },
+                "tokens": {
+                  "input_tokens": 11597,
+                  "output_tokens": 297
+                }
+              },
+              {
+                "turn": 9,
+                "tool": "get_flight_details",
+                "input": {
+                  "flight_id": "FL00002076"
+                },
+                "output": {
+                  "flight_id": "FL00002076",
+                  "airline_iata": "DL",
+                  "flight_number": "DL6593",
+                  "origin": "MIA",
+                  "destination": "ORD",
+                  "depart_date": "2025-06-12",
+                  "depart_time": "19:55",
+                  "arrive_time": "22:49",
+                  "duration_hours": 2.9,
+                  "price": 313.45,
+                  "seats_available": 143,
+                  "stops": 1,
+                  "layover_airport": "ABQ",
+                  "layover_minutes": 100,
+                  "cabin": "economy",
+                  "origin_city": "Miami",
+                  "destination_city": "Chicago"
+                },
+                "tokens": {
+                  "input_tokens": 11597,
+                  "output_tokens": 297
+                }
+              },
+              {
+                "turn": 9,
+                "tool": "get_hotel_details",
+                "input": {
+                  "hotel_id": "HT00192"
+                },
+                "output": {
+                  "hotel_id": "HT00192",
+                  "name": "Motel 6 Miami",
+                  "city": "Miami",
+                  "airport_iata": "MIA",
+                  "brand": "Motel 6",
+                  "tier": "economy",
+                  "price_per_night": 71.84,
+                  "rating": 2.9,
+                  "num_reviews": 7435,
+                  "amenities": "[\"wifi\", \"parking\"]",
+                  "pet_friendly": 1,
+                  "accessible": 1,
+                  "vegan_options": 0,
+                  "distance_miles": 2.7,
+                  "max_guests": 4
+                },
+                "tokens": {
+                  "input_tokens": 11597,
+                  "output_tokens": 297
+                }
+              },
+              {
+                "turn": 9,
+                "tool": "get_hotel_details",
+                "input": {
+                  "hotel_id": "HT00196"
+                },
+                "output": {
+                  "hotel_id": "HT00196",
+                  "name": "The Miami Motel 6",
+                  "city": "Miami",
+                  "airport_iata": "MIA",
+                  "brand": "Motel 6",
+                  "tier": "economy",
+                  "price_per_night": 101.53,
+                  "rating": 3.9,
+                  "num_reviews": 657,
+                  "amenities": "[\"wifi\", \"parking\"]",
+                  "pet_friendly": 1,
+                  "accessible": 1,
+                  "vegan_options": 0,
+                  "distance_miles": 15.7,
+                  "max_guests": 5
+                },
+                "tokens": {
+                  "input_tokens": 11597,
+                  "output_tokens": 297
+                }
+              },
+              {
+                "turn": 9,
+                "tool": "get_hotel_details",
+                "input": {
+                  "hotel_id": "HT00176"
+                },
+                "output": {
+                  "hotel_id": "HT00176",
+                  "name": "Holiday Inn Miami",
+                  "city": "Miami",
+                  "airport_iata": "MIA",
+                  "brand": "Holiday Inn",
+                  "tier": "midscale",
+                  "price_per_night": 165.39,
+                  "rating": 4.1,
+                  "num_reviews": 2580,
+                  "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\", \"parking\"]",
+                  "pet_friendly": 1,
+                  "accessible": 1,
+                  "vegan_options": 0,
+                  "distance_miles": 13.0,
+                  "max_guests": 4
+                },
+                "tokens": {
+                  "input_tokens": 11597,
+                  "output_tokens": 297
+                }
+              },
+              {
+                "turn": 10,
+                "tool": "calculate_total_cost",
+                "input": {
+                  "flight_ids": [
+                    "FL00000625",
+                    "FL00002076"
+                  ],
+                  "hotel_id": "HT00192",
+                  "hotel_nights": 2,
+                  "activity_ids": [
+                    "AC000415",
+                    "AC000412",
+                    "AC000423",
+                    "AC000432"
+                  ]
+                },
+                "output": {
+                  "flights": 549.27,
+                  "hotel": 143.68,
+                  "activities": 74.94,
+                  "total": 767.8900000000001
+                },
+                "tokens": {
+                  "input_tokens": 12769,
+                  "output_tokens": 182
+                }
+              }
+            ],
+            "output": {
+              "flights": [],
+              "hotels": [],
+              "activities": [],
+              "total_cost": 0
+            },
+            "message": "I ran out of planning steps. Please try a simpler query.",
+            "error": "max turns exceeded",
+            "scores": {
+              "constraint_satisfaction": 0.125,
+              "budget_efficiency": 1.0,
+              "logistics_score": 0.7,
+              "evaluation_score": 0.5025,
+              "passed": false
+            },
+            "score_details": {
+              "constraint_satisfaction": {
+                "has_flight": false,
+                "has_hotel": false,
+                "has_availability": false,
+                "within_budget": true,
+                "budget_used": 0,
+                "budget_limit": 5000,
+                "long_hotel_stay": false,
+                "expected_nights": 13,
+                "actual_nights": 0,
+                "has_multiple_activities": false,
+                "min_activities": 5,
+                "actual_activities": 0,
+                "met_constraints": 1,
+                "total_constraints": 8
+              },
+              "budget_efficiency": {
+                "agent_cost": 0,
+                "optimal_cost": 0,
+                "budget_source": "task_constraint",
+                "budget": 5000,
+                "over_budget": false
+              },
+              "logistics": {
+                "violations": [
+                  "Agent error: max turns exceeded"
+                ],
+                "violation_count": 1
+              }
+            }
+          }
+        ],
+        "individual_runs": [
+          {
+            "run": 1,
+            "cs": 0.75,
+            "be": 1.0,
+            "ls": 1.0,
+            "eval": 0.875,
+            "passed": true,
+            "details": {
+              "constraint_satisfaction": {
+                "has_flight": true,
+                "has_hotel": true,
+                "correct_dates": false,
+                "correct_destination": true,
+                "has_availability": true,
+                "within_budget": true,
+                "budget_used": 736.66,
+                "budget_limit": 5000,
+                "long_hotel_stay": false,
+                "expected_nights": 13,
+                "actual_nights": 2,
+                "has_multiple_activities": true,
+                "min_activities": 5,
+                "actual_activities": 5,
+                "met_constraints": 6,
+                "total_constraints": 8
+              },
+              "budget_efficiency": {
+                "agent_cost": 736.66,
+                "optimal_cost": 736.66,
+                "budget_source": "task_constraint",
+                "budget": 5000,
+                "over_budget": false
+              },
+              "logistics": {
+                "violations": [],
+                "violation_count": 0
+              }
+            }
+          },
+          {
+            "run": 2,
+            "cs": 0.125,
+            "be": 1.0,
+            "ls": 1.0,
+            "eval": 0.5625,
+            "passed": false,
+            "details": {
+              "constraint_satisfaction": {
+                "has_flight": false,
+                "has_hotel": false,
+                "has_availability": false,
+                "within_budget": true,
+                "budget_used": 0,
+                "budget_limit": 5000,
+                "long_hotel_stay": false,
+                "expected_nights": 13,
+                "actual_nights": 0,
+                "has_multiple_activities": false,
+                "min_activities": 5,
+                "actual_activities": 0,
+                "met_constraints": 1,
+                "total_constraints": 8
+              },
+              "budget_efficiency": {
+                "agent_cost": 0,
+                "optimal_cost": 0,
+                "budget_source": "task_constraint",
+                "budget": 5000,
+                "over_budget": false
+              },
+              "logistics": {
+                "violations": [],
+                "violation_count": 0
+              }
+            }
+          },
+          {
+            "run": 3,
+            "cs": 0.125,
+            "be": 1.0,
+            "ls": 0.7,
+            "eval": 0.5025,
+            "passed": false,
+            "details": {
+              "constraint_satisfaction": {
+                "has_flight": false,
+                "has_hotel": false,
+                "has_availability": false,
+                "within_budget": true,
+                "budget_used": 0,
+                "budget_limit": 5000,
+                "long_hotel_stay": false,
+                "expected_nights": 13,
+                "actual_nights": 0,
+                "has_multiple_activities": false,
+                "min_activities": 5,
+                "actual_activities": 0,
+                "met_constraints": 1,
+                "total_constraints": 8
+              },
+              "budget_efficiency": {
+                "agent_cost": 0,
+                "optimal_cost": 0,
+                "budget_source": "task_constraint",
+                "budget": 5000,
+                "over_budget": false
+              },
+              "logistics": {
+                "violations": [
+                  "Agent error: max turns exceeded"
+                ],
+                "violation_count": 1
+              }
+            }
+          }
+        ],
+        "last_run_details": {
+          "constraint_satisfaction": {
+            "has_flight": false,
+            "has_hotel": false,
+            "has_availability": false,
+            "within_budget": true,
+            "budget_used": 0,
+            "budget_limit": 5000,
+            "long_hotel_stay": false,
+            "expected_nights": 13,
+            "actual_nights": 0,
+            "has_multiple_activities": false,
+            "min_activities": 5,
+            "actual_activities": 0,
+            "met_constraints": 1,
+            "total_constraints": 8
+          },
+          "budget_efficiency": {
+            "agent_cost": 0,
+            "optimal_cost": 0,
+            "budget_source": "task_constraint",
+            "budget": 5000,
+            "over_budget": false
+          },
+          "logistics": {
+            "violations": [
+              "Agent error: max turns exceeded"
+            ],
+            "violation_count": 1
+          }
+        }
+      },
+      "agent_response": {
+        "output": {
+          "flights": [],
+          "hotels": [],
+          "activities": [],
+          "total_cost": 0
+        },
+        "message": "I ran out of planning steps. Please try a simpler query.",
+        "error": "max turns exceeded",
+        "trace": [
+          {
+            "step": "parse_constraints",
+            "output": {
+              "hard": [
+                "Origin: Chicago",
+                "Destination: Miami, Florida",
+                "Arrival date: June 10th, 2025",
+                "Trip duration: 2 weeks",
+                "Budget: $5,000"
+              ],
+              "soft": [],
+              "assumptions": [
+                "Assuming 1 traveller",
+                "Assuming round-trip travel",
+                "Assuming departure date is approximately June 10th, 2025 and return date is approximately June 24th, 2025 (2 weeks later)",
+                "Assuming budget of $5,000 covers all trip expenses (flights, accommodation, activities, food, etc.)",
+                "Assuming flexible on accommodation type and airline"
+              ]
+            }
+          },
+          {
+            "turn": 1,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Chicago",
+              "destination": "Miami",
+              "date": "2025-06-10",
+              "max_results": 10
+            },
+            "output": [
+              {
+                "flight_id": "FL00000625",
+                "airline_iata": "WN",
+                "flight_number": "WN2033",
+                "origin_city": "Chicago",
+                "destination_city": "Miami",
+                "origin_iata": "ORD",
+                "destination_iata": "MIA",
+                "depart_date": "2025-06-10",
+                "depart_time": "17:10",
+                "arrive_time": "20:17",
+                "duration_hours": 3.13,
+                "price": 235.82,
+                "seats_available": 95,
+                "stops": 0,
+                "layover_airport": null,
+                "layover_minutes": null,
+                "cabin": "economy"
+              },
+              {
+                "flight_id": "FL00000626",
+                "airline_iata": "DL",
+                "flight_number": "DL344",
+                "origin_city": "Chicago",
+                "destination_city": "Miami",
+                "origin_iata": "ORD",
+                "destination_iata": "MIA",
+                "depart_date": "2025-06-10",
+                "depart_time": "22:40",
+                "arrive_time": "01:41",
+                "duration_hours": 3.02,
+                "price": 236.44,
+                "seats_available": 64,
+                "stops": 0,
+                "layover_airport": null,
+                "layover_minutes": null,
+                "cabin": "economy"
+              }
+            ],
+            "tokens": {
+              "input_tokens": 2985,
+              "output_tokens": 399
+            }
+          },
+          {
+            "turn": 1,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-24",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 2985,
+              "output_tokens": 399
+            }
+          },
+          {
+            "turn": 1,
+            "tool": "search_hotels",
+            "input": {
+              "city": "Miami",
+              "check_in": "2025-06-10",
+              "check_out": "2025-06-24",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 2985,
+              "output_tokens": 399
+            }
+          },
+          {
+            "turn": 1,
+            "tool": "search_activities",
+            "input": {
+              "city": "Miami",
+              "max_results": 15
+            },
+            "output": [
+              {
+                "activity_id": "AC000415",
+                "name": "Miami State Park Hike",
+                "city": "Miami",
+                "category": "adventure",
+                "duration_hrs": 4.0,
+                "cost": 0.93,
+                "rating": 4.3,
+                "open_time": "08:00",
+                "close_time": "19:00",
+                "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                "tags": "[\"outdoor\", \"active\", \"nature\", \"adventure\"]"
+              },
+              {
+                "activity_id": "AC000410",
+                "name": "Miami Farmers Market",
+                "city": "Miami",
+                "category": "food",
+                "duration_hrs": 2.0,
+                "cost": 12.25,
+                "rating": 4.0,
+                "open_time": "07:00",
+                "close_time": "13:00",
+                "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                "tags": "[\"food\", \"outdoor\", \"morning\", \"family\"]"
+              },
+              {
+                "activity_id": "AC000416",
+                "name": "Miami Waterfall Trail",
+                "city": "Miami",
+                "category": "adventure",
+                "duration_hrs": 3.5,
+                "cost": 16.54,
+                "rating": 4.3,
+                "open_time": "08:00",
+                "close_time": "19:00",
+                "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                "tags": "[\"outdoor\", \"active\", \"nature\", \"adventure\"]"
+              },
+              {
+                "activity_id": "AC000412",
+                "name": "Miami Botanical Garden",
+                "city": "Miami",
+                "category": "nature",
+                "duration_hrs": 2.0,
+                "cost": 18.1,
+                "rating": 4.6,
+                "open_time": "08:00",
+                "close_time": "19:00",
+                "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                "tags": "[\"nature\", \"outdoor\", \"family\"]"
+              },
+              {
+                "activity_id": "AC000433",
+                "name": "Miami Trivia Night",
+                "city": "Miami",
+                "category": "entertainment",
+                "duration_hrs": 2.0,
+                "cost": 18.81,
+                "rating": 4.3,
+                "open_time": "10:00",
+                "close_time": "21:00",
+                "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                "tags": "[\"indoor\", \"adults\", \"evening\", \"group\"]"
+              },
+              {
+                "activity_id": "AC000439",
+                "name": "Miami Children's Museum",
+                "city": "Miami",
+                "category": "culture",
+                "duration_hrs": 2.5,
+                "cost": 19.86,
+                "rating": 4.7,
+                "open_time": "10:00",
+                "close_time": "19:00",
+                "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                "tags": "[\"indoor\", \"family\", \"kids\", \"education\"]"
+              },
+              {
+                "activity_id": "AC000438",
+                "name": "Miami Planetarium Show",
+                "city": "Miami",
+                "category": "culture",
+                "duration_hrs": 1.5,
+                "cost": 21.57,
+                "rating": 3.6,
+                "open_time": "09:00",
+                "close_time": "17:00",
+                "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                "tags": "[\"indoor\", \"family\", \"education\", \"science\"]"
+              },
+              {
+                "activity_id": "AC000432",
+                "name": "Miami Live Music Venue",
+                "city": "Miami",
+                "category": "nightlife",
+                "duration_hrs": 2.5,
+                "cost": 25.83,
+                "rating": 4.5,
+                "open_time": "18:00",
+                "close_time": "02:00",
+                "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Wed\"]",
+                "tags": "[\"music\", \"adults\", \"evening\", \"nightlife\"]"
+              },
+              {
+                "activity_id": "AC000424",
+                "name": "Street Art Tour Miami",
+                "city": "Miami",
+                "category": "culture",
+                "duration_hrs": 2.0,
+                "cost": 26.68,
+                "rating": 3.7,
+                "open_time": "08:00",
+                "close_time": "19:00",
+                "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                "tags": "[\"outdoor\", \"walking\", \"art\", \"culture\"]"
+              },
+              {
+                "activity_id": "AC000435",
+                "name": "Miami Yoga in the Park",
+                "city": "Miami",
+                "category": "wellness",
+                "duration_hrs": 1.5,
+                "cost": 29.07,
+                "rating": 5.0,
+                "open_time": "07:00",
+                "close_time": "13:00",
+                "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                "tags": "[\"outdoor\", \"morning\", \"active\", \"family\"]"
+              },
+              {
+                "activity_id": "AC000423",
+                "name": "Architecture Walk Miami",
+                "city": "Miami",
+                "category": "culture",
+                "duration_hrs": 2.0,
+                "cost": 30.08,
+                "rating": 4.8,
+                "open_time": "08:00",
+                "close_time": "19:00",
+                "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                "tags": "[\"walking\", \"outdoor\", \"history\", \"culture\"]"
+              },
+              {
+                "activity_id": "AC000403",
+                "name": "Miami Contemporary Art Gall.",
+                "city": "Miami",
+                "category": "culture",
+                "duration_hrs": 2.0,
+                "cost": 30.35,
+                "rating": 4.7,
+                "open_time": "10:00",
+                "close_time": "18:00",
+                "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                "tags": "[\"art\", \"indoor\", \"adults\", \"culture\"]"
+              },
+              {
+                "activity_id": "AC000400",
+                "name": "Miami Art Museum",
+                "city": "Miami",
+                "category": "culture",
+                "duration_hrs": 3.0,
+                "cost": 31.16,
+                "rating": 4.6,
+                "open_time": "11:00",
+                "close_time": "20:00",
+                "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                "tags": "[\"art\", \"indoor\", \"family\", \"culture\"]"
+              },
+              {
+                "activity_id": "AC000451",
+                "name": "Miami Night Market",
+                "city": "Miami",
+                "category": "food",
+                "duration_hrs": 2.0,
+                "cost": 31.24,
+                "rating": 4.7,
+                "open_time": "08:00",
+                "close_time": "19:00",
+                "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                "tags": "[\"food\", \"outdoor\", \"evening\", \"family\"]"
+              },
+              {
+                "activity_id": "AC000452",
+                "name": "Miami Scenic Drive Tour",
+                "city": "Miami",
+                "category": "sightseeing",
+                "duration_hrs": 3.0,
+                "cost": 35.8,
+                "rating": 4.4,
+                "open_time": "08:00",
+                "close_time": "19:00",
+                "days_open": "[\"Fri\", \"Mon\", \"Sat\", \"Sun\", \"Thu\", \"Tue\", \"Wed\"]",
+                "tags": "[\"outdoor\", \"scenic\", \"family\"]"
+              }
+            ],
+            "tokens": {
+              "input_tokens": 2985,
+              "output_tokens": 399
+            }
+          },
+          {
+            "turn": 2,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-23",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 5871,
+              "output_tokens": 307
+            }
+          },
+          {
+            "turn": 2,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-25",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 5871,
+              "output_tokens": 307
+            }
+          },
+          {
+            "turn": 2,
+            "tool": "search_hotels",
+            "input": {
+              "city": "Miami",
+              "max_results": 15
+            },
+            "output": [
+              {
+                "hotel_id": "HT00192",
+                "name": "Motel 6 Miami",
+                "city": "Miami",
+                "airport_iata": "MIA",
+                "brand": "Motel 6",
+                "tier": "economy",
+                "price_per_night": 71.84,
+                "rating": 2.9,
+                "num_reviews": 7435,
+                "amenities": "[\"wifi\", \"parking\"]",
+                "distance_miles": 2.7
+              },
+              {
+                "hotel_id": "HT00190",
+                "name": "Miami Grand Motel 6",
+                "city": "Miami",
+                "airport_iata": "MIA",
+                "brand": "Motel 6",
+                "tier": "economy",
+                "price_per_night": 88.81,
+                "rating": 3.4,
+                "num_reviews": 3443,
+                "amenities": "[\"wifi\", \"parking\"]",
+                "distance_miles": 17.4
+              },
+              {
+                "hotel_id": "HT00196",
+                "name": "The Miami Motel 6",
+                "city": "Miami",
+                "airport_iata": "MIA",
+                "brand": "Motel 6",
+                "tier": "economy",
+                "price_per_night": 101.53,
+                "rating": 3.9,
+                "num_reviews": 657,
+                "amenities": "[\"wifi\", \"parking\"]",
+                "distance_miles": 15.7
+              },
+              {
+                "hotel_id": "HT00173",
+                "name": "The Miami Motel 6",
+                "city": "Miami",
+                "airport_iata": "MIA",
+                "brand": "Motel 6",
+                "tier": "economy",
+                "price_per_night": 103.31,
+                "rating": 3.3,
+                "num_reviews": 1330,
+                "amenities": "[\"wifi\", \"parking\"]",
+                "distance_miles": 5.9
+              },
+              {
+                "hotel_id": "HT00179",
+                "name": "Extended Stay Miami",
+                "city": "Miami",
+                "airport_iata": "MIA",
+                "brand": "Extended Stay",
+                "tier": "economy",
+                "price_per_night": 128.04,
+                "rating": 2.7,
+                "num_reviews": 2400,
+                "amenities": "[\"wifi\", \"kitchen\", \"parking\"]",
+                "distance_miles": 1.3
+              },
+              {
+                "hotel_id": "HT00193",
+                "name": "Hampton Inn Miami",
+                "city": "Miami",
+                "airport_iata": "MIA",
+                "brand": "Hampton Inn",
+                "tier": "midscale",
+                "price_per_night": 137.45,
+                "rating": 3.6,
+                "num_reviews": 1787,
+                "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\"]",
+                "distance_miles": 14.0
+              },
+              {
+                "hotel_id": "HT00189",
+                "name": "The Miami La Quinta",
+                "city": "Miami",
+                "airport_iata": "MIA",
+                "brand": "La Quinta",
+                "tier": "economy",
+                "price_per_night": 144.14,
+                "rating": 2.5,
+                "num_reviews": 4446,
+                "amenities": "[\"pool\", \"wifi\", \"breakfast\"]",
+                "distance_miles": 19.9
+              },
+              {
+                "hotel_id": "HT00197",
+                "name": "La Quinta Miami",
+                "city": "Miami",
+                "airport_iata": "MIA",
+                "brand": "La Quinta",
+                "tier": "economy",
+                "price_per_night": 145.04,
+                "rating": 3.1,
+                "num_reviews": 7264,
+                "amenities": "[\"pool\", \"wifi\", \"breakfast\"]",
+                "distance_miles": 6.5
+              },
+              {
+                "hotel_id": "HT00171",
+                "name": "Extended Stay Miami",
+                "city": "Miami",
+                "airport_iata": "MIA",
+                "brand": "Extended Stay",
+                "tier": "economy",
+                "price_per_night": 148.69,
+                "rating": 3.6,
+                "num_reviews": 4260,
+                "amenities": "[\"wifi\", \"kitchen\", \"parking\"]",
+                "distance_miles": 7.1
+              },
+              {
+                "hotel_id": "HT00195",
+                "name": "Miami Grand Fairfield Inn",
+                "city": "Miami",
+                "airport_iata": "MIA",
+                "brand": "Fairfield Inn",
+                "tier": "midscale",
+                "price_per_night": 153.43,
+                "rating": 3.7,
+                "num_reviews": 942,
+                "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\"]",
+                "distance_miles": 4.4
+              },
+              {
+                "hotel_id": "HT00186",
+                "name": "La Quinta Miami",
+                "city": "Miami",
+                "airport_iata": "MIA",
+                "brand": "La Quinta",
+                "tier": "economy",
+                "price_per_night": 158.48,
+                "rating": 3.2,
+                "num_reviews": 45,
+                "amenities": "[\"pool\", \"wifi\", \"breakfast\"]",
+                "distance_miles": 1.9
+              },
+              {
+                "hotel_id": "HT00176",
+                "name": "Holiday Inn Miami",
+                "city": "Miami",
+                "airport_iata": "MIA",
+                "brand": "Holiday Inn",
+                "tier": "midscale",
+                "price_per_night": 165.39,
+                "rating": 4.1,
+                "num_reviews": 2580,
+                "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\", \"parking\"]",
+                "distance_miles": 13.0
+              },
+              {
+                "hotel_id": "HT00184",
+                "name": "Fairfield Inn Miami",
+                "city": "Miami",
+                "airport_iata": "MIA",
+                "brand": "Fairfield Inn",
+                "tier": "midscale",
+                "price_per_night": 229.29,
+                "rating": 3.8,
+                "num_reviews": 6931,
+                "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\"]",
+                "distance_miles": 3.3
+              },
+              {
+                "hotel_id": "HT00194",
+                "name": "Fairfield Inn Miami",
+                "city": "Miami",
+                "airport_iata": "MIA",
+                "brand": "Fairfield Inn",
+                "tier": "midscale",
+                "price_per_night": 240.95,
+                "rating": 4.3,
+                "num_reviews": 6960,
+                "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\"]",
+                "distance_miles": 14.4
+              },
+              {
+                "hotel_id": "HT00178",
+                "name": "DoubleTree Miami",
+                "city": "Miami",
+                "airport_iata": "MIA",
+                "brand": "DoubleTree",
+                "tier": "midscale",
+                "price_per_night": 243.65,
+                "rating": 4.3,
+                "num_reviews": 1098,
+                "amenities": "[\"pool\", \"gym\", \"wifi\", \"parking\", \"bar\"]",
+                "distance_miles": 7.6
+              }
+            ],
+            "tokens": {
+              "input_tokens": 5871,
+              "output_tokens": 307
+            }
+          },
+          {
+            "turn": 3,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-22",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 7921,
+              "output_tokens": 329
+            }
+          },
+          {
+            "turn": 3,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-21",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 7921,
+              "output_tokens": 329
+            }
+          },
+          {
+            "turn": 3,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-20",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 7921,
+              "output_tokens": 329
+            }
+          },
+          {
+            "turn": 4,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-26",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 8341,
+              "output_tokens": 314
+            }
+          },
+          {
+            "turn": 4,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-27",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 8341,
+              "output_tokens": 314
+            }
+          },
+          {
+            "turn": 4,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-30",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 8341,
+              "output_tokens": 314
+            }
+          },
+          {
+            "turn": 5,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Chicago",
+              "destination": "Miami",
+              "date": "2025-06-09",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 8746,
+              "output_tokens": 323
+            }
+          },
+          {
+            "turn": 5,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Chicago",
+              "destination": "Miami",
+              "date": "2025-06-11",
+              "max_results": 10
+            },
+            "output": [
+              {
+                "flight_id": "FL00000628",
+                "airline_iata": "DL",
+                "flight_number": "DL8731",
+                "origin_city": "Chicago",
+                "destination_city": "Miami",
+                "origin_iata": "ORD",
+                "destination_iata": "MIA",
+                "depart_date": "2025-06-11",
+                "depart_time": "09:25",
+                "arrive_time": "12:27",
+                "duration_hours": 3.04,
+                "price": 293.36,
+                "seats_available": 69,
+                "stops": 1,
+                "layover_airport": "SLC",
+                "layover_minutes": 107,
+                "cabin": "economy"
+              },
+              {
+                "flight_id": "FL00000627",
+                "airline_iata": "UA",
+                "flight_number": "UA1358",
+                "origin_city": "Chicago",
+                "destination_city": "Miami",
+                "origin_iata": "ORD",
+                "destination_iata": "MIA",
+                "depart_date": "2025-06-11",
+                "depart_time": "06:50",
+                "arrive_time": "09:44",
+                "duration_hours": 2.91,
+                "price": 304.15,
+                "seats_available": 20,
+                "stops": 0,
+                "layover_airport": null,
+                "layover_minutes": null,
+                "cabin": "economy"
+              }
+            ],
+            "tokens": {
+              "input_tokens": 8746,
+              "output_tokens": 323
+            }
+          },
+          {
+            "turn": 5,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-07-01",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 8746,
+              "output_tokens": 323
+            }
+          },
+          {
+            "turn": 6,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-15",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 9478,
+              "output_tokens": 409
+            }
+          },
+          {
+            "turn": 6,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-18",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 9478,
+              "output_tokens": 409
+            }
+          },
+          {
+            "turn": 6,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-12",
+              "max_results": 10
+            },
+            "output": [
+              {
+                "flight_id": "FL00002075",
+                "airline_iata": "NK",
+                "flight_number": "NK9964",
+                "origin_city": "Miami",
+                "destination_city": "Chicago",
+                "origin_iata": "MIA",
+                "destination_iata": "ORD",
+                "depart_date": "2025-06-12",
+                "depart_time": "18:10",
+                "arrive_time": "21:01",
+                "duration_hours": 2.86,
+                "price": 217.04,
+                "seats_available": 83,
+                "stops": 0,
+                "layover_airport": null,
+                "layover_minutes": null,
+                "cabin": "business"
+              },
+              {
+                "flight_id": "FL00002076",
+                "airline_iata": "DL",
+                "flight_number": "DL6593",
+                "origin_city": "Miami",
+                "destination_city": "Chicago",
+                "origin_iata": "MIA",
+                "destination_iata": "ORD",
+                "depart_date": "2025-06-12",
+                "depart_time": "19:55",
+                "arrive_time": "22:49",
+                "duration_hours": 2.9,
+                "price": 313.45,
+                "seats_available": 143,
+                "stops": 1,
+                "layover_airport": "ABQ",
+                "layover_minutes": 100,
+                "cabin": "economy"
+              }
+            ],
+            "tokens": {
+              "input_tokens": 9478,
+              "output_tokens": 409
+            }
+          },
+          {
+            "turn": 6,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-11",
+              "max_results": 10
+            },
+            "output": [
+              {
+                "flight_id": "FL00002073",
+                "airline_iata": "B6",
+                "flight_number": "B68794",
+                "origin_city": "Miami",
+                "destination_city": "Chicago",
+                "origin_iata": "MIA",
+                "destination_iata": "ORD",
+                "depart_date": "2025-06-11",
+                "depart_time": "06:40",
+                "arrive_time": "09:34",
+                "duration_hours": 2.91,
+                "price": 202.65,
+                "seats_available": 135,
+                "stops": 1,
+                "layover_airport": "JAX",
+                "layover_minutes": 62,
+                "cabin": "economy"
+              },
+              {
+                "flight_id": "FL00002074",
+                "airline_iata": "UA",
+                "flight_number": "UA2614",
+                "origin_city": "Miami",
+                "destination_city": "Chicago",
+                "origin_iata": "MIA",
+                "destination_iata": "ORD",
+                "depart_date": "2025-06-11",
+                "depart_time": "11:25",
+                "arrive_time": "14:34",
+                "duration_hours": 3.15,
+                "price": 318.27,
+                "seats_available": 128,
+                "stops": 0,
+                "layover_airport": null,
+                "layover_minutes": null,
+                "cabin": "economy"
+              }
+            ],
+            "tokens": {
+              "input_tokens": 9478,
+              "output_tokens": 409
+            }
+          },
+          {
+            "turn": 7,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-13",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 10639,
+              "output_tokens": 442
+            }
+          },
+          {
+            "turn": 7,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-14",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 10639,
+              "output_tokens": 442
+            }
+          },
+          {
+            "turn": 7,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-16",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 10639,
+              "output_tokens": 442
+            }
+          },
+          {
+            "turn": 7,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-17",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 10639,
+              "output_tokens": 442
+            }
+          },
+          {
+            "turn": 8,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-19",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 11198,
+              "output_tokens": 308
+            }
+          },
+          {
+            "turn": 8,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-28",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 11198,
+              "output_tokens": 308
+            }
+          },
+          {
+            "turn": 8,
+            "tool": "search_flights",
+            "input": {
+              "origin": "Miami",
+              "destination": "Chicago",
+              "date": "2025-06-29",
+              "max_results": 10
+            },
+            "output": [],
+            "tokens": {
+              "input_tokens": 11198,
+              "output_tokens": 308
+            }
+          },
+          {
+            "turn": 9,
+            "tool": "get_flight_details",
+            "input": {
+              "flight_id": "FL00000625"
+            },
+            "output": {
+              "flight_id": "FL00000625",
+              "airline_iata": "WN",
+              "flight_number": "WN2033",
+              "origin": "ORD",
+              "destination": "MIA",
+              "depart_date": "2025-06-10",
+              "depart_time": "17:10",
+              "arrive_time": "20:17",
+              "duration_hours": 3.13,
+              "price": 235.82,
+              "seats_available": 95,
+              "stops": 0,
+              "layover_airport": null,
+              "layover_minutes": null,
+              "cabin": "economy",
+              "origin_city": "Chicago",
+              "destination_city": "Miami"
+            },
+            "tokens": {
+              "input_tokens": 11597,
+              "output_tokens": 297
+            }
+          },
+          {
+            "turn": 9,
+            "tool": "get_flight_details",
+            "input": {
+              "flight_id": "FL00002076"
+            },
+            "output": {
+              "flight_id": "FL00002076",
+              "airline_iata": "DL",
+              "flight_number": "DL6593",
+              "origin": "MIA",
+              "destination": "ORD",
+              "depart_date": "2025-06-12",
+              "depart_time": "19:55",
+              "arrive_time": "22:49",
+              "duration_hours": 2.9,
+              "price": 313.45,
+              "seats_available": 143,
+              "stops": 1,
+              "layover_airport": "ABQ",
+              "layover_minutes": 100,
+              "cabin": "economy",
+              "origin_city": "Miami",
+              "destination_city": "Chicago"
+            },
+            "tokens": {
+              "input_tokens": 11597,
+              "output_tokens": 297
+            }
+          },
+          {
+            "turn": 9,
+            "tool": "get_hotel_details",
+            "input": {
+              "hotel_id": "HT00192"
+            },
+            "output": {
+              "hotel_id": "HT00192",
+              "name": "Motel 6 Miami",
+              "city": "Miami",
+              "airport_iata": "MIA",
+              "brand": "Motel 6",
+              "tier": "economy",
+              "price_per_night": 71.84,
+              "rating": 2.9,
+              "num_reviews": 7435,
+              "amenities": "[\"wifi\", \"parking\"]",
+              "pet_friendly": 1,
+              "accessible": 1,
+              "vegan_options": 0,
+              "distance_miles": 2.7,
+              "max_guests": 4
+            },
+            "tokens": {
+              "input_tokens": 11597,
+              "output_tokens": 297
+            }
+          },
+          {
+            "turn": 9,
+            "tool": "get_hotel_details",
+            "input": {
+              "hotel_id": "HT00196"
+            },
+            "output": {
+              "hotel_id": "HT00196",
+              "name": "The Miami Motel 6",
+              "city": "Miami",
+              "airport_iata": "MIA",
+              "brand": "Motel 6",
+              "tier": "economy",
+              "price_per_night": 101.53,
+              "rating": 3.9,
+              "num_reviews": 657,
+              "amenities": "[\"wifi\", \"parking\"]",
+              "pet_friendly": 1,
+              "accessible": 1,
+              "vegan_options": 0,
+              "distance_miles": 15.7,
+              "max_guests": 5
+            },
+            "tokens": {
+              "input_tokens": 11597,
+              "output_tokens": 297
+            }
+          },
+          {
+            "turn": 9,
+            "tool": "get_hotel_details",
+            "input": {
+              "hotel_id": "HT00176"
+            },
+            "output": {
+              "hotel_id": "HT00176",
+              "name": "Holiday Inn Miami",
+              "city": "Miami",
+              "airport_iata": "MIA",
+              "brand": "Holiday Inn",
+              "tier": "midscale",
+              "price_per_night": 165.39,
+              "rating": 4.1,
+              "num_reviews": 2580,
+              "amenities": "[\"pool\", \"gym\", \"wifi\", \"breakfast\", \"parking\"]",
+              "pet_friendly": 1,
+              "accessible": 1,
+              "vegan_options": 0,
+              "distance_miles": 13.0,
+              "max_guests": 4
+            },
+            "tokens": {
+              "input_tokens": 11597,
+              "output_tokens": 297
+            }
+          },
+          {
+            "turn": 10,
+            "tool": "calculate_total_cost",
+            "input": {
+              "flight_ids": [
+                "FL00000625",
+                "FL00002076"
+              ],
+              "hotel_id": "HT00192",
+              "hotel_nights": 2,
+              "activity_ids": [
+                "AC000415",
+                "AC000412",
+                "AC000423",
+                "AC000432"
+              ]
+            },
+            "output": {
+              "flights": 549.27,
+              "hotel": 143.68,
+              "activities": 74.94,
+              "total": 767.8900000000001
+            },
+            "tokens": {
+              "input_tokens": 12769,
+              "output_tokens": 182
+            }
+          }
+        ]
+      }
+    }
+  ]
