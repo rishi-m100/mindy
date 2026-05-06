@@ -304,7 +304,7 @@ The viewer displays:
 The repository also includes an autonomous agent built to navigate the Mindy-Bench environment.
 * **SQL Tool Calling:** The agent translates natural language into SQL queries to interact with the `.db` synthetic database.
 * **Constraint Parsing:** Automatically identifies hard and soft constraints from user prompts.
-* **Current Status:** Tool calling is functional for flight data; hotel and activity tool integration is in progress.
+* **Current Status:** Fully functional
 
 ## 🛠️ Tech Stack
 * **Language:** Python
